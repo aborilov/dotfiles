@@ -11,10 +11,11 @@ from gi.repository import Xkl, Gdk, GdkX11
 class kb():
 
     def __init__(self):
-        display = GdkX11.x11_get_default_xdisplay()
-        self.engine = Xkl.Engine.get_instance(display)
+        pass
 
     def curkb(self):
+        display = GdkX11.x11_get_default_xdisplay()
+        self.engine = Xkl.Engine.get_instance(display)
         t = subprocess.check_output(["xset", "-q"])
         num = int(t.splitlines()[1].split()[9][4])
         groups = self.engine.get_groups_names()

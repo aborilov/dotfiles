@@ -13,14 +13,26 @@ keys = [
     Key([modkey], "m", lazy.layout.maximize()),
     Key([modkey], "q", lazy.shutdown()),
     Key([modkey], "e", lazy.spawn("pcmanfm")),
-    Key([modkey], "b", lazy.spawn("google-chrome")),
-    Key([modkey], "x", lazy.spawn("xtrlock")),
+    Key([modkey], "b", lazy.spawn("chromium")),
+    Key([modkey], "x", lazy.spawn("xscreensaver-command --lock")),
     Key([modkey], "s", lazy.spawn("sublime_text")),
     Key([modkey], "w", lazy.window.kill()),
     Key([modkey], "Left", lazy.prevgroup()),
     Key([modkey], "Right", lazy.nextgroup()),
     Key([modkey], "t", lazy.window.disable_floating()),
-    Key([modkey], "Return", lazy.spawn("urxvtcd")),
+    Key([modkey], "Return", lazy.spawn("urxvt -pe tabbed")),
+    Key(
+        [], "XF86AudioRaiseVolume",
+        lazy.spawn("amixer -c 0 -q set Master 2dB+")
+    ),
+    Key(
+        [], "XF86AudioLowerVolume",
+        lazy.spawn("amixer -c 0 -q set Master 2dB-")
+    ),
+    Key(
+        [], "XF86AudioMute",
+        lazy.spawn("amixer -c 0 -q set Master toggle")
+    ),
     # Key([modkey], "p",
     #     lazy.spawn(
     #         "exec dmenu_run "
@@ -60,7 +72,7 @@ groups = [
     Group("Browser"),
     Group("Jabber"),
     Group("Develope"),
-    Group("terminals"),
+    Group("Terminals"),
     Group("FileManager"),
     Group("6"),
     Group("7"),
@@ -87,38 +99,43 @@ layouts = [
 
 floating_layout = layout.Floating(**border)
 
+# global font options
+widget_defaults = dict(
+    font = 'Consolas',
+    fontsize = 13,
+    padding = 1,
+    borderwidth=2,
+    margin_x=1,
+    margin_y=1
+)
+
 screens = [
     Screen(
-        top=bar.Bar([widget.GroupBox(
-            borderwidth=2, font='Consolas', fontsize=13,
-            padding=1, margin_x=1, margin_y=1),
-            #widget.Sep(),
-            widget.WindowName(
-                font='Consolas', fontsize=13, margin_x=6),
+        top=bar.Bar([widget.GroupBox(urgent_alert_method='text', **widget_defaults),
+            widget.WindowName(**widget_defaults),
             widget.Prompt(),
-            #widget.Sep(),
             widget.Systray(),
-            widget.kblayout(font='Consolas', fontsize=13, padding=6),
-            widget.Notify(font='Consolas', fontsize=10, padding=6),
-            #widget.Sep(),
-            widget.Clock(
-                '%H:%M:%S %d.%m.%Y',
-                font='Consolas', fontsize=13, padding=6), ], 24,),
-    ),
-            #widget.Sep(),
-            #widget.Battery(
-            #    font='Consolas', fontsize=13, margin_x=6,
-            #    energy_now_file="charge_now",
-            #    energy_full_file="charge_full",
-            #    power_now_file="current_now")
-]
+            #widget.kblayout(font='Consolas', fontsize=13, padding=6),
+            widget.Notify(**widget_defaults),
+            widget.Volume(**widget_defaults),
+            widget.Sep(),
+            widget.Clock('%H:%M:%S %d.%m.%Y',**widget_defaults),
+            widget.Sep(),
+            widget.Battery(energy_now_file = "charge_now",
+                                energy_full_file = "charge_full",
+                                power_now_file = "current_now",
+                                update_delay = 5,
+                                charge_char = '>',
+                                discharge_char = '<',**widget_defaults)
+            ],
+            24,))]
 
 
 @hook.subscribe.client_new
 def grouper(window, windows={
         'google-chrome': 'Browser',
         'sublime_text': 'Develope',
-        'urxvt': ['Jabber', 'terminals'],
+        'urxvt': ['Jabber', 'Terminals'],
         'pcmanfm': 'FileManager'}):
 
     """
@@ -181,7 +198,7 @@ floating_layout = layout.Floating()
 mouse = ()
 
 
-@hook.subscribe.startup
-def runner():
-    import subprocess
-    subprocess.Popen(['./startup.sh'])
+#@hook.subscribe.startup
+#def runner():
+#    import subprocess
+#    subprocess.Popen(['./startup.sh'])

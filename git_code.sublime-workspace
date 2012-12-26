@@ -143,21 +143,37 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "/distr/distr/qtile/code/qtile/config/config.py",
-			"settings":
-			{
-				"buffer_size": 3399,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "Packages/User/bash.sublime-build",
 	"command_palette":
 	{
-		"height": 117.0,
+		"height": 112.0,
 		"selected_items":
 		[
+			[
+				"close",
+				"Project: Close"
+			],
+			[
+				"stat",
+				"Git: Status"
+			],
+			[
+				"clo",
+				"Project: Close"
+			],
+			[
+				"comm",
+				"Git: Commit"
+			],
+			[
+				"git",
+				"Git: Add Current File"
+			],
+			[
+				"status",
+				"Git: Status"
+			],
 			[
 				"git pus",
 				"Git: Push"
@@ -175,20 +191,12 @@
 				"Git: Status"
 			],
 			[
-				"git",
-				"Git: Status"
-			],
-			[
 				"insta",
 				"Package Control: Install Package"
 			],
 			[
 				"save",
 				"Project: Save As"
-			],
-			[
-				"comm",
-				"SVN: Commit…"
 			],
 			[
 				"list",
@@ -251,24 +259,12 @@
 				"File: Copy Name Encoded"
 			],
 			[
-				"stat",
-				"SVN: Status"
-			],
-			[
-				"close",
-				"File: Close All"
-			],
-			[
 				"svnlog",
 				"SVN: Log"
 			],
 			[
 				"info",
 				"SVN: Info"
-			],
-			[
-				"status",
-				"SVN: Status"
 			],
 			[
 				"svn log",
@@ -411,7 +407,7 @@
 				"SVN: Commit…"
 			]
 		],
-		"width": 449.0
+		"width": 467.0
 	},
 	"console":
 	{
@@ -428,6 +424,8 @@
 	},
 	"file_history":
 	[
+		"/distr/distr/qtile/code/qtile/widget/kb.py",
+		"/distr/distr/qtile/code/qtile/config/config.py",
 		"/home/pavel/distr/qtile/code/sublime/Preferences.sublime-settings",
 		"/home/pavel/.config/sublime-text-2/Packages/Git/Git.sublime-settings",
 		"/home/pavel/distr/qtile/code/sublime/COMMIT_EDITMSG.COMMIT_EDITMSG",
@@ -553,9 +551,7 @@
 		"/home/pavel/.gvfs/disk_o on 192.168.1.198/ОПО/Аборилов/Yanux/kictartANDnetboot/files/nfs/ks_srv.cfg",
 		"/home/pavel/.gvfs/disk_o on 192.168.1.198/ОПО/Аборилов/Yanux/kictartANDnetboot/files/nfs/ks_arm_devel.cfg",
 		"/home/pavel/.gvfs/disk_o on 192.168.1.198/ОПО/Аборилов/Yanux/kistartANDnetboot/config.py",
-		"/home/pavel/.gvfs/disk_o on 192.168.1.198/ОПО/Аборилов/Yanux/kictartANDnetboot/README",
-		"/tmp/sublime-svn-1342767649/SVN",
-		"/media/AC52-E6F6/distr/yanux/closeYanux/close.sh"
+		"/home/pavel/.gvfs/disk_o on 192.168.1.198/ОПО/Аборилов/Yanux/kictartANDnetboot/README"
 	],
 	"find":
 	{
@@ -720,41 +716,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "/distr/distr/qtile/code/qtile/config/config.py",
-					"settings":
-					{
-						"buffer_size": 3399,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true,
-							"xiki": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -811,6 +774,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"kb",
+				"qtile/widget/kb.py"
+			],
 			[
 				"con",
 				"qtile/config/config.py"
@@ -1128,12 +1095,12 @@
 		"selected_items":
 		[
 			[
-				"deve",
-				"/home/pavel/distr/qtile/qtile_dev/qtile.sublime-project"
+				"",
+				"/home/pavel/workspace/ConsoleID_with_ws/ConsoleID/ConsoleID_WS.sublime-project"
 			],
 			[
-				"",
-				"/home/pavel/workspace/ConsoleID/ConsoleID.sublime-project"
+				"deve",
+				"/home/pavel/distr/qtile/qtile_dev/qtile.sublime-project"
 			],
 			[
 				"m5",
@@ -1149,7 +1116,7 @@
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": true,
+	"side_bar_visible": false,
 	"side_bar_width": 453.0,
 	"status_bar_visible": true
 }

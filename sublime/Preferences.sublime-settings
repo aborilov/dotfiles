@@ -1,18 +1,16 @@
 {
-	"color_scheme": "Packages/Pylinter/MonokaiPylinter.tmTheme",
-	"font_size": 11,
+	"caret_style": "phase",
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+	"ensure_newline_at_eof_on_save": true,
+	"fallback_encoding": "Cyrillic (Windows 1251)",
+	"font_size": 12.0,
+	"highlight_line": true,
 	"ignored_packages":
 	[
-		""
 	],
 	"tab_size": 4,
+	"theme": "Soda Light.sublime-theme",
 	"translate_tabs_to_spaces": true,
-	"trim_automatic_white_space": true,
-    // If enabled, will highlight any line with a caret
-    "highlight_line": true,
-    // Valid values are "smooth", "phase", "blink", "wide" and "solid".
-    "caret_style": "phase",
-    "trim_trailing_white_space_on_save": true,
-    "ensure_newline_at_eof_on_save": true,
-    "fallback_encoding": "Cyrillic (Windows 1251)"
+	"trim_automatic_white_spaces": true,
+	"trim_trailing_white_space_on_save": true
 }

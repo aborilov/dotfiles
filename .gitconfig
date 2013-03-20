@@ -1,0 +1,9 @@
+[user]
+	name = Aborilov Pavel
+	email = aborilov@gmail.com
+[core]
+	excludesfile = ~/.gitignore
+[merge]
+    tool = meld
+[diff]
+	external = git-meld

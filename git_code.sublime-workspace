@@ -147,16 +147,20 @@
 	"build_system": "Packages/User/bash.sublime-build",
 	"command_palette":
 	{
-		"height": 112.0,
+		"height": 152.0,
 		"selected_items":
 		[
 			[
-				"close",
-				"Project: Close"
+				"add",
+				"Git: Add..."
 			],
 			[
 				"stat",
 				"Git: Status"
+			],
+			[
+				"close",
+				"Project: Close"
 			],
 			[
 				"clo",
@@ -424,6 +428,7 @@
 	},
 	"file_history":
 	[
+		"/distr/distr/qtile/code/git-meld",
 		"/distr/distr/qtile/code/qtile/widget/kb.py",
 		"/distr/distr/qtile/code/qtile/config/config.py",
 		"/home/pavel/distr/qtile/code/sublime/Preferences.sublime-settings",
@@ -550,8 +555,7 @@
 		"/home/pavel/.gvfs/disk_o on 192.168.1.198/ОПО/Аборилов/Yanux/kictartANDnetboot/files/nfs/ks_pu.cfg",
 		"/home/pavel/.gvfs/disk_o on 192.168.1.198/ОПО/Аборилов/Yanux/kictartANDnetboot/files/nfs/ks_srv.cfg",
 		"/home/pavel/.gvfs/disk_o on 192.168.1.198/ОПО/Аборилов/Yanux/kictartANDnetboot/files/nfs/ks_arm_devel.cfg",
-		"/home/pavel/.gvfs/disk_o on 192.168.1.198/ОПО/Аборилов/Yanux/kistartANDnetboot/config.py",
-		"/home/pavel/.gvfs/disk_o on 192.168.1.198/ОПО/Аборилов/Yanux/kictartANDnetboot/README"
+		"/home/pavel/.gvfs/disk_o on 192.168.1.198/ОПО/Аборилов/Yanux/kistartANDnetboot/config.py"
 	],
 	"find":
 	{
@@ -1094,6 +1098,10 @@
 		"height": 500.0,
 		"selected_items":
 		[
+			[
+				"cons",
+				"/home/pavel/workspace/newConsoleID/ConsoleAssadID.sublime-project"
+			],
 			[
 				"",
 				"/home/pavel/workspace/ConsoleID_with_ws/ConsoleID/ConsoleID_WS.sublime-project"

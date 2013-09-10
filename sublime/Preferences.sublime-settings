@@ -3,7 +3,7 @@
 	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
 	"ensure_newline_at_eof_on_save": true,
 	"fallback_encoding": "Cyrillic (Windows 1251)",
-	"font_size": 11.0,
+	"font_size": 12.0,
 	"highlight_line": true,
 	"ignored_packages":
 	[
@@ -12,5 +12,10 @@
 	"theme": "Soda Light.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_automatic_white_spaces": true,
-	"trim_trailing_white_space_on_save": true
+	"trim_trailing_white_space_on_save": true,
+	"complete_parameters" : true,
+    "complete_all_parameters": false,
+    "auto_complete_triggers": [{"selector": "source.python - string - comment - constant.numeric", "characters": "."}]
+
+
 }

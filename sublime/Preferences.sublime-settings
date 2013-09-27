@@ -1,6 +1,15 @@
 {
+	"auto_complete_triggers":
+	[
+		{
+			"characters": ".",
+			"selector": "source.python - string - comment - constant.numeric"
+		}
+	],
 	"caret_style": "phase",
 	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+	"complete_all_parameters": true,
+	"complete_parameters": true,
 	"ensure_newline_at_eof_on_save": true,
 	"fallback_encoding": "Cyrillic (Windows 1251)",
 	"font_size": 12.0,
@@ -12,10 +21,5 @@
 	"theme": "Soda Light.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_automatic_white_spaces": true,
-	"trim_trailing_white_space_on_save": true,
-	"complete_parameters" : true,
-    "complete_all_parameters": true,
-    "auto_complete_triggers": [{"selector": "source.python - string - comment - constant.numeric", "characters": "."}]
-
-
+	"trim_trailing_white_space_on_save": true
 }

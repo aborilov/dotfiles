@@ -15,7 +15,8 @@
 	"trim_trailing_white_space_on_save": true,
 	"complete_parameters" : true,
     "complete_all_parameters": true,
-    "auto_complete_triggers": [{"selector": "source.python - string - comment - constant.numeric", "characters": "."}]
+    "auto_complete_triggers": [{"selector": "source.python - string - comment - constant.numeric", "characters": "."}],
+    "vintage_ctrl_keys": true
 
 
 }

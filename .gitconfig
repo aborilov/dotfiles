@@ -5,8 +5,8 @@
 	excludesfile = ~/.gitignore
 [merge]
     tool = meld
-[diff]
-	external = git-meld
+#[diff]
+#	external = git-meld
 [alias]
     co = checkout
     ci = commit

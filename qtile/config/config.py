@@ -1,213 +1,182 @@
-from libqtile.manager import Key, Click, Drag, Screen, Group
+from libqtile.config import Key, Group
+from libqtile.manager import Drag, Click, Screen
 from libqtile.command import lazy
-from libqtile import layout, bar, widget, hook
+from libqtile import layout, bar, widget
+from libqtile import hook
 
+mod = "mod4"
+alt = "mod1"
 
-modkey = "mod4"
 keys = [
-    Key([modkey], "k", lazy.layout.down()),
-    Key([modkey, "shift"], "n", lazy.to_next_screen()),
-    Key([modkey], "j", lazy.layout.up()),
-    Key([modkey], "h", lazy.layout.grow()),
-    Key([modkey], "l", lazy.layout.shrink()),
-    Key([modkey], "n", lazy.layout.normalize()),
-    Key([modkey], "m", lazy.layout.maximize()),
-    Key([modkey, "shift"], "q", lazy.shutdown()),
-    Key([modkey], "e", lazy.spawn("pcmanfm")),
-    Key([modkey], "b", lazy.spawn("chromium")),
-    Key([modkey], "x", lazy.spawn("xscreensaver-command --lock")),
-    Key([modkey], "s", lazy.spawn("sublime_text")),
-    Key([modkey], "w", lazy.window.kill()),
-    Key([modkey], "Left", lazy.prevgroup()),
-    Key([modkey], "Right", lazy.nextgroup()),
-    Key([modkey], "t", lazy.window.disable_floating()),
-    Key([modkey], "Return", lazy.spawn("urxvt -pe tabbed")),
-    Key([modkey], "F10", lazy.spawn("import -window root ~/screenshot.png")),
+    # Switch between windows in current stack pane
     Key(
-        [], "XF86AudioRaiseVolume",
-        lazy.spawn("amixer -c 0 -q set Master 2dB+")
+        [mod], "w",
+        lazy.window.kill()
     ),
     Key(
-        [], "XF86AudioLowerVolume",
-        lazy.spawn("amixer -c 0 -q set Master 2dB-")
+        [alt], "Tab",
+        lazy.group.next_window()),
+    # this is usefull when floating windows get buried
+    Key(
+        [mod], "Left",
+        lazy.group.prevgroup()
     ),
     Key(
-        [], "XF86AudioMute",
-        lazy.spawn("amixer -c 0 -q set Master toggle")
+        [mod], "Right",
+        lazy.group.nextgroup()
     ),
-    # Key([modkey], "p",
-    #     lazy.spawn(
-    #         "exec dmenu_run "
-    #         "-fn 'Consolas:size=13' -nb '#000000' -nf '#ffffff' -b")),
-    Key([modkey], "space", lazy.nextlayout()),
-    Key([modkey, "shift"], "k", lazy.layout.shuffle_down()),
-    Key([modkey, "shift"], "j", lazy.layout.shuffle_up()),
-    Key([modkey], "p", lazy.spawncmd()),
-    Key([modkey], "y", lazy.layout.toggle_split()),
     Key(
-        [modkey, "shift"], "space",
-        lazy.layout.flip()
+        [mod], "h",
+        lazy.layout.previous()
     ),
-    Key([modkey, "control"], "r", lazy.restart()),
-    Key([modkey, "shift"], "t", lazy.window.enable_floating()),
+    Key(
+        [mod], "l",
+        lazy.layout.next()
+    ),
+    Key(
+        [mod], "j",
+        lazy.layout.up()
+    ),
+    Key(
+        [mod], "k",
+        lazy.layout.down()
+    ),
+    Key(
+        [mod], "f",
+        lazy.window.toggle_floating()
+    ),
+    Key(
+        [mod, "shift"], "space",
+        lazy.layout.rotate(),
+        lazy.layout.flip(),              # xmonad-tall
+        ),
+    Key(
+        [mod, "shift"], "k",
+        lazy.layout.shuffle_up(),         # Stack, xmonad-tall
+        ),
+    Key(
+        [mod, "shift"], "j",
+        lazy.layout.shuffle_down(),       # Stack, xmonad-tall
+        ),
+    Key(
+        [mod, "control"], "l",
+        lazy.layout.add(),                # Stack
+        lazy.layout.increase_ratio(),     # Tile
+        lazy.layout.maximize(),           # xmonad-tall
+        ),
+    Key(
+        [mod, "control"], "h",
+        lazy.layout.delete(),             # Stack
+        lazy.layout.decrease_ratio(),     # Tile
+        lazy.layout.normalize(),          # xmonad-tall
+        ),
+    Key(
+        [mod, "control"], "k",
+        lazy.layout.shrink(),             # xmonad-tall
+        lazy.layout.decrease_nmaster(),   # Tile
+        ),
+    Key(
+        [mod, "control"], "j",
+        lazy.layout.grow(),               # xmonad-tall
+        lazy.layout.increase_nmaster(),   # Tile
+        ),
+    Key(
+        [mod], "n",
+        lazy.spawn("firefox")
+        ),
+    Key(
+        [mod], "d",
+        lazy.spawn("subl")
+        ),
+
+    # Toggle between split and unsplit sides of stack.
+    # Split = all windows displayed
+    # Unsplit = 1 window displayed, like Max layout, but still with
+    # multiple stack panes
+    Key(
+        [mod, "shift"], "Return",
+        lazy.layout.toggle_split()
+    ),
+    Key([mod], "Return", lazy.spawn("urxvt")),
+
+    # Toggle between different layouts as defined below
+    Key([mod], "Tab",    lazy.nextlayout()),
+    Key([mod], "w",      lazy.window.kill()),
+
+    Key(
+        [mod, "control"],  "r",
+        lazy.restart()
+    ),
+    Key(
+        [mod], "space",
+        lazy.spawn(
+            "dmenu_run -fn 'Terminus:size=8' -nb '#000000' -nf '#fefefe'")
+    ),
 ]
+
 
 mouse = [
     Drag(
-        [modkey], "Button1", lazy.window.set_position_floating(),
-        start=lazy.window.get_position()),
+        [mod], "Button1",
+        lazy.window.set_position_floating(),
+        start=lazy.window.get_position()
+    ),
     Drag(
-        [modkey], "Button3", lazy.window.set_size_floating(),
-        start=lazy.window.get_size()),
-    Click([modkey], "Button2", lazy.window.bring_to_front())
+        [mod], "Button3",
+        lazy.window.set_size_floating(),
+        start=lazy.window.get_size()
+    ),
+    Click(
+        [mod], "Button2",
+        lazy.window.bring_to_front()
+    ),
 ]
+
+groups = [Group(str(i)) for i in (1, 2, 3, 4, 5, 6, 7, 8, 9, 0)]
+for i in groups:
+    keys.append(Key([mod], i.name, lazy.group[i.name].toscreen()))
+    keys.append(
+        Key(
+            [mod, "shift"], i.name, lazy.window.togroup(i.name),
+            lazy.group[i.name].toscreen()))
 
 border = dict(
-    border_focus = '#ffffff',
-    border_width=2,
-    border_normal="#222222",)
+    border_normal='#808080',
+    border_width=1,
+)
 
-groups = [
-    Group("Browser"),
-    Group("Jabber"),
-    Group("Develope"),
-    Group("Terminals"),
-    Group("FileManager"),
-    Group("6"),
-    Group("7"),
-    Group("8"),
-]
-
-for index, grp in enumerate(groups):
-
-    keys.extend([
-
-        # switch to group
-        Key([modkey], str(index + 1), lazy.group[grp.name].toscreen(0)),
-        Key([modkey, "control"], str(index + 1), lazy.group[grp.name].toscreen(1)),
-
-        # send to group
-        Key([modkey, "shift"], str(index + 1), lazy.window.togroup(grp.name)),
-
-    ])
+dgroups_key_binder = None
+dgroups_app_rules = []
 
 layouts = [
-    layout.MonadTall(**border),
-    layout.TreeTab(),
-    layout.Stack(stacks=1)
+    layout.Max(),
+    layout.MonadTall(**border)
 ]
-
-floating_layout = layout.Floating(**border)
-
-# global font options
-widget_defaults = dict(
-    font = 'Consolas',
-    fontsize = 13,
-    padding = 1,
-    borderwidth=2,
-    margin_x=1,
-    margin_y=1
-)
 
 screens = [
     Screen(
-        top=bar.Bar([widget.GroupBox(urgent_alert_method='text', **widget_defaults),
-            widget.WindowName(**widget_defaults),
-            widget.Prompt(),
-            widget.Systray(),
-            #widget.kblayout(font='Consolas', fontsize=13, padding=6),
-            widget.Notify(**widget_defaults),
-            widget.Volume(**widget_defaults),
-            widget.Sep(),
-            widget.Clock('%H:%M:%S %d.%m.%Y',**widget_defaults),
-            widget.Sep(),
-            widget.Pacman(**widget_defaults),
-            widget.Sep(),
-            widget.Battery(energy_now_file = "charge_now",
-                                energy_full_file = "charge_full",
-                                power_now_file = "current_now",
-                                update_delay = 5,
-                                charge_char = '>',
-                                discharge_char = '<',**widget_defaults)
+        bottom=bar.Bar(
+            [
+                widget.GroupBox(margin_y=1,
+                                margin_x=1,
+                                borderwidth=1,
+                                padding=1,),
+                widget.Prompt(),
+                widget.WindowName(foreground="a0a0a0",),
+                widget.Notify(),
+                widget.Systray(),
+                widget.Clock(foreground="a0a0a0",
+                             fmt="%H:%M %d.%m.%Y",),
             ],
-            24,)),
-    Screen()]
+            18,
+        ),
+    ),
+]
 
 
-@hook.subscribe.client_new
-def grouper(window, windows={
-        'chromium': 'Browser',
-        'sublime_text': 'Develope',
-        'urxvt': ['Jabber', 'Terminals'],
-        'pcmanfm': 'FileManager'}):
+def main(self):
+    pass
 
-    """
-    This function relies on the contentious feature of default arguments
-    where upon function definition if the argument is a mutable datatype,
-    then you are able to mutate the data held within that object.
-
-    Current usage:
-
-    {window_name: group_name}
-
-    or for grouping windows to different groups you will need to have a
-    list under the window-key with the order that you're starting the
-    apps in.
-
-    See the 'runner()' function for an example of using this method.
-
-    Here:
-
-    {window_name: [group_name1, group_name2]}
-
-    Window name can be found via window.window.get_wm_class()
-    """
-    try:
-        windowtype = window.window.get_wm_class()[0]
-
-        # if the window is in our map
-        if windowtype in windows.keys():
-
-            # opening terminal applications gives
-            # the window title the same name, this
-            # means that we need to treat these apps
-            # differently
-
-            if windowtype != 'urxvt':
-                window.togroup(windows[windowtype])
-                windows.pop(windowtype)
-
-                # if it's not on our special list,
-                # we send it to the group and pop
-                # that entry out the map
-            else:
-                try:
-                    window.togroup(windows[windowtype][0])
-                    windows[windowtype].pop(0)
-                except IndexError:
-                    pass
-    except:
-        pass
-
-floating_layout = layout.Floating(
-
-    auto_float_types=[
-        'utility',
-
-        'notification',
-        'toolbar',
-
-        'splash',
-        'dialog',
-
-    ],
-    float_rules=[
-        {'wmclass': 'sun-awt-X11-XDialogPeer'}, #vue
-
-        {'wmclass': 'sun-awt-X11-XWindowPeer'}, #vue
-
-    ],
-)
 
 @hook.subscribe.client_new
 def dialogs(window):
@@ -215,19 +184,39 @@ def dialogs(window):
             or window.window.get_wm_transient_for()):
         window.floating = True
 
+
 @hook.subscribe.client_new
 def vue_tools(window):
-    if window.window.get_wm_class() == ('sun-awt-X11-XDialogPeer', 'java-lang-Thread'):
+    if((window.window.get_wm_class() == (
+        'sun-awt-X11-XWindowPeer', 'tufts-vue-VUE')
+            and window.window.get_wm_hints()['window_group'] != 0)
+            or (window.window.get_wm_class() == (
+                'sun-awt-X11-XDialogPeer', 'tufts-vue-VUE'))):
         window.floating = True
 
-main = None
-follow_mouse_focus = True
-cursor_warp = False
-floating_layout = layout.Floating()
-mouse = ()
+
+@hook.subscribe.client_new
+def idle_dialogues(window):
+    if((window.window.get_name() == 'Search Dialog') or
+      (window.window.get_name() == 'Module') or
+      (window.window.get_name() == 'Goto') or
+      (window.window.get_name() == 'IDLE Preferences')):
+        window.floating = True
 
 
-#@hook.subscribe.startup
-#def runner():
-#    import subprocess
-#    subprocess.Popen(['./startup.sh'])
+@hook.subscribe.client_new
+def libreoffice_dialogues(window):
+    if ((window.window.get_wm_class() == (
+        'VCLSalFrame', 'libreoffice-calc')) or
+            (window.window.get_wm_class() == (
+                'VCLSalFrame', 'LibreOffice 3.4'))):
+        window.floating = True
+
+# main = None
+# follow_mouse_focus = False
+# bring_front_click = False
+# cursor_warp = False
+# floating_layout = layout.Floating()
+# mouse = ()
+# auto_fullscreen = True
+# widget_defaults = {}

@@ -11,10 +11,3 @@ PS1="$sq_color\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \"[\[\033[01;36m
 export EDITOR="vim"
 VBOX_USB=usbfs
 alias ssh="TERM=rxvt ssh"
-alias gs='git status '
-alias ga='git add '
-alias gb='git branch '
-alias gc='git commit'
-alias gd='git diff'
-alias go='git checkout '
-alias gk='gitg&'

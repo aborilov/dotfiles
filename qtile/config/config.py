@@ -3,15 +3,37 @@ from libqtile.manager import Drag, Click, Screen
 from libqtile.command import lazy
 from libqtile import layout, bar, widget
 from libqtile import hook
+import locale
+
+
+locale.setlocale(locale.LC_ALL, '')
 
 mod = "mod4"
 alt = "mod1"
 
 keys = [
+    Key([mod], "Home", lazy.spawn("mpc toggle")),
+    Key([mod], "End", lazy.spawn("mpc stop")),
+    Key([mod], "Page_Down", lazy.spawn("mpc next")),
+    Key([mod], "Delete", lazy.spawn("mpc prev")),
+    Key(
+        [mod], "m",
+        lazy.spawn(
+            """
+            mpc playlist | dmenu -l 10  |\
+            xargs -I '{}' sh -c "mpc playlist \
+            | grep -rne '{}' | awk -F: '{print \$1}'" \
+            | xargs -I '{}' sh -c "test -n '{}' && mpc play '{}'"
+            """)
+    ),
     # Switch between windows in current stack pane
     Key(
         [mod], "w",
         lazy.window.kill()
+    ),
+    Key(
+        [alt], "grave",
+        lazy.window.bring_to_front()
     ),
     Key(
         [alt], "Tab",
@@ -89,6 +111,10 @@ keys = [
         lazy.spawn("subl")
         ),
 
+    Key(
+        [mod], "u",
+        lazy.spawn("uzbl-tabbed")
+        ),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
@@ -107,10 +133,19 @@ keys = [
         [mod, "control"],  "r",
         lazy.restart()
     ),
+    Key([mod, "control"], "q", lazy.shutdown()),
     Key(
         [mod], "space",
         lazy.spawn(
             "dmenu_run -fn 'Terminus:size=8' -nb '#000000' -nf '#fefefe'")
+    ),
+    Key(
+        [mod], "equal",
+        lazy.spawn("amixer -c 0 -q set Master 2dB+")
+    ),
+    Key(
+        [mod], "minus",
+        lazy.spawn("amixer -c 0 -q set Master 2dB-")
     ),
 ]
 
@@ -150,12 +185,13 @@ dgroups_app_rules = []
 
 layouts = [
     layout.Max(),
-    layout.MonadTall(**border)
+    layout.MonadTall(**border),
+    layout.Matrix(**border)
 ]
 
 screens = [
     Screen(
-        bottom=bar.Bar(
+        top=bar.Bar(
             [
                 widget.GroupBox(margin_y=1,
                                 margin_x=1,
@@ -165,6 +201,10 @@ screens = [
                 widget.WindowName(foreground="a0a0a0",),
                 widget.Notify(),
                 widget.Systray(),
+                widget.KeyboardLayout(configured_keyboards=["us", "ru"]),
+                widget.Volume(foreground="70ff70",),
+                widget.BitcoinTicker(currency="rub", format="{buy}"),
+                widget.Mpris(),
                 widget.Clock(foreground="a0a0a0",
                              fmt="%H:%M %d.%m.%Y",),
             ],
@@ -211,6 +251,33 @@ def libreoffice_dialogues(window):
             (window.window.get_wm_class() == (
                 'VCLSalFrame', 'LibreOffice 3.4'))):
         window.floating = True
+
+
+import subprocess
+import re
+
+
+def is_running(process):
+    s = subprocess.Popen(["ps", "axw"], stdout=subprocess.PIPE)
+    for x in s.stdout:
+        if re.search(process, x):
+            return True
+    return False
+
+
+def execute_once(process):
+    if not is_running(process):
+        return subprocess.Popen(process.split())
+
+
+@hook.subscribe.startup
+def startup():
+    execute_once("nm-applet")
+    execute_once("synergy")
+    execute_once("feh --bg-fill /home/pavel/Pictures/arch.png")
+    execute_once(
+        'setxkbmap -layout us,ru -option grp:caps_toggle,grp_led:scroll')
+
 
 # main = None
 # follow_mouse_focus = False

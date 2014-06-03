@@ -112,6 +112,7 @@ keys = [
         [mod], "u",
         lazy.spawn("uzbl-tabbed")
         ),
+    Key([mod], "Return", lazy.spawn("urxvt")),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
@@ -120,11 +121,9 @@ keys = [
         [mod, "shift"], "Return",
         lazy.layout.toggle_split()
     ),
-    Key([mod], "Return", lazy.spawn("urxvt")),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab",    lazy.nextlayout()),
-    Key([mod], "w",      lazy.window.kill()),
 
     Key(
         [mod, "control"],  "r",
@@ -194,7 +193,6 @@ screens = [
                                 margin_x=1,
                                 borderwidth=1,
                                 padding=1,),
-                widget.Prompt(),
                 widget.WindowName(foreground="a0a0a0",),
                 widget.Notify(),
                 widget.Systray(),

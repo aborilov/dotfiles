@@ -3,10 +3,7 @@ from libqtile.manager import Drag, Click, Screen
 from libqtile.command import lazy
 from libqtile import layout, bar, widget
 from libqtile import hook
-import locale
 
-
-locale.setlocale(locale.LC_ALL, '')
 
 mod = "mod4"
 alt = "mod1"

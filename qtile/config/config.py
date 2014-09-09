@@ -54,11 +54,11 @@ keys = [
     ),
     Key(
         [mod], "j",
-        lazy.layout.up()
+        lazy.layout.down()
     ),
     Key(
         [mod], "k",
-        lazy.layout.down()
+        lazy.layout.up()
     ),
     Key(
         [mod], "f",
@@ -66,7 +66,7 @@ keys = [
     ),
     Key(
         [mod, "shift"], "space",
-        lazy.layout.rotate(),
+        # lazy.layout.rotate(),
         lazy.layout.flip(),              # xmonad-tall
         ),
     Key(
@@ -107,7 +107,10 @@ keys = [
         [mod], "d",
         lazy.spawn("subl")
         ),
-
+    Key(
+        [mod], "o",
+        lazy.spawn("pcmanfm")
+        ),
     Key(
         [mod], "u",
         lazy.spawn("uzbl-tabbed")
@@ -183,6 +186,7 @@ layouts = [
     layout.Max(),
     layout.MonadTall(**border),
     layout.Matrix(**border)
+    # layout.Stack(**border)
 ]
 
 screens = [
@@ -268,9 +272,11 @@ def execute_once(process):
 def startup():
     execute_once("nm-applet")
     execute_once("synergy")
+    execute_once("xmodmap ~/.xmodmap")
     execute_once("feh --bg-fill /home/pavel/Pictures/arch.png")
+    execute_once('setxkbmap -option ctrl:nocaps ')
     execute_once(
-        'setxkbmap -layout us,ru -option grp:caps_toggle,grp_led:scroll')
+        'setxkbmap -layout us,ru -option grp:alt_shift_toggle,grp_led:scroll')
 
 
 # main = None

@@ -8,6 +8,6 @@ set expandtab
 set hlsearch
 vnoremap < <gv
 vnoremap > >gv
-inoremap jk <Esc>
 " Press Space to turn off highlighting and clear any message already displayed.
 :nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+set nocompatible

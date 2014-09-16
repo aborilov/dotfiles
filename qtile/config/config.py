@@ -115,7 +115,7 @@ keys = [
         [mod], "u",
         lazy.spawn("uzbl-tabbed")
         ),
-    Key([mod], "Return", lazy.spawn("urxvt")),
+    Key([mod], "Return", lazy.spawn("urxvt -e screen")),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with

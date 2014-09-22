@@ -202,6 +202,7 @@ screens = [
                 widget.Systray(),
                 widget.KeyboardLayout(configured_keyboards=["us", "ru"]),
                 widget.Volume(foreground="70ff70",),
+                widget.BatteryIcon(),
                 widget.BitcoinTicker(currency="rub", format="{buy}"),
                 widget.Clock(foreground="a0a0a0",
                              fmt="%H:%M %d.%m.%Y",),

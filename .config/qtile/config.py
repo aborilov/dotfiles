@@ -186,7 +186,7 @@ layouts = [
     layout.Max(),
     layout.MonadTall(**border),
     layout.Matrix(**border)
-    # layout.Stack(**border)
+    # layout.Stack(num_stacks=1, **border)
 ]
 
 screens = [
@@ -200,6 +200,7 @@ screens = [
                 widget.WindowName(foreground="a0a0a0",),
                 widget.Notify(),
                 widget.Systray(),
+                # widget.CurrentLayout(),
                 widget.KeyboardLayout(configured_keyboards=["us", "ru"]),
                 widget.Volume(foreground="70ff70",),
                 widget.BitcoinTicker(currency="rub", format="{buy}"),

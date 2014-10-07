@@ -115,6 +115,10 @@ keys = [
         [mod], "u",
         lazy.spawn("uzbl-tabbed")
         ),
+    Key(
+        [mod], "c",
+        lazy.spawn("notify-send _")
+        ),
     Key([mod], "Return", lazy.spawn("urxvt -e screen")),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
@@ -203,6 +207,7 @@ screens = [
                 # widget.CurrentLayout(),
                 widget.KeyboardLayout(configured_keyboards=["us", "ru"]),
                 widget.Volume(foreground="70ff70",),
+                widget.BatteryIcon(),
                 widget.BitcoinTicker(currency="rub", format="{buy}"),
                 widget.Clock(foreground="a0a0a0",
                              fmt="%H:%M %d.%m.%Y",),

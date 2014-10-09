@@ -18,6 +18,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'klen/python-mode'
 Plugin 'rosenfeld/conque-term'
+Plugin 'vim-scripts/taglist.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 syntax on
@@ -38,6 +39,29 @@ let g:pymode_syntax_all = 1
 let g:pymode_syntax_indent_errors = g:pymode_syntax_all
 let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
+"airline
+let g:airline#extensions#tabline#enabled = 1
+
+"YouCompleteMy
+let g:ycm_autoclose_preview_window_after_completion=1
+nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+"ConqueTerm
+let g:ConqueTerm_StartMessages = 0
+nnoremap <leader>r :exe "ConqueTermSplit ipython -i " . expand("%")<CR>
+
+"NerdTree
+map <C-k><C-b> :NERDTreeToggle<CR>
+
+"CtrlP
+let g:ctrlp_match_window = 'bottom,order:ttb,min:10,max:30'
+
+"TagList
+let g:Tlist_Close_On_Select = 1
+let g:Tlist_GainFocus_On_ToggleOpen = 1
+let g:Tlist_File_Fold_Auto_Close = 1
+nnoremap <leader>t :TlistToggle<CR>
+
 set incsearch                     " Find as you type search
 set hlsearch                      " Highlight search terms
 set ignorecase                    " Case-insensitive searching.
@@ -50,17 +74,10 @@ vnoremap > >gv
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
 colorscheme molokai
-let g:airline#extensions#tabline#enabled = 1
-"let g:syntastic_python_checkers = ['pep8', 'python', 'flake8']
-"let g:syntastic_aggregate_errors = 1
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ConqueTerm_StartMessages = 0
+
 map <C-q> :bd<CR>
-nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <leader>r :exe "ConqueTermSplit ipython -i " . expand("%")<CR>
 set list listchars=tab:\ \ ,trail:·
 set noshowmode
-
 set nowrap
 set bs=indent,eol,start
 set tabstop=4

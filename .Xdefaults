@@ -8,8 +8,10 @@ urxvt.fading:           15
 urxvt.fadeColor:        black
 urxvt.shading:          75
 urxvt.cursorColor:     green
-urxvt.perl-ext-common: default,tabbed
-
+urxvt*iso14755:        false
+urxvt.perl-ext-common: default,clipboard
+urxvt.keysym.Shift-Control-C: perl:clipboard:copy
+urxvt.keysym.Shift-Control-V: perl:clipboard:paste
 
 
 

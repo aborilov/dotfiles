@@ -451,4 +451,7 @@ sync_spawn_exec @scripts_dir/load_cookies.sh @data_home/uzbl/session-cookies.txt
 # Set the "home" page.
 set uri = uzbl.org/doesitwork/@COMMIT
 
+# open page in vim
+@cbind   v  = sh 'echo "js document.documentElement.outerHTML" | socat - unix-connect:$UZBL_SOCKET | html2text -nobs -width 160 | gvim - -c "set nofen"'
+
 # vim: set fdm=syntax:

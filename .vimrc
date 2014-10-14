@@ -17,6 +17,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'klen/python-mode'
+Plugin 'tomasr/molokai'
 Plugin 'rosenfeld/conque-term'
 call vundle#end()            " required
 filetype plugin indent on    " required

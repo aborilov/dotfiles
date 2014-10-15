@@ -119,7 +119,7 @@ keys = [
         [mod], "c",
         lazy.spawn("notify-send _")
         ),
-    Key([mod], "Return", lazy.spawn("urxvt -e screen")),
+    Key([mod], "Return", lazy.spawn("urxvt -e screen -x -R")),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with

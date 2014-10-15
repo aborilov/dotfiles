@@ -5,7 +5,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
-Bundle 'Raimondi/delimitMate'
+"Bundle 'Raimondi/delimitMate'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
@@ -57,6 +57,7 @@ map <C-k><C-b> :NERDTreeToggle<CR>
 
 "CtrlP
 let g:ctrlp_match_window = 'bottom,order:ttb,min:10,max:30'
+let g:ctrlp_show_hidden = 1
 
 "TagList
 let g:Tlist_Close_On_Select = 1

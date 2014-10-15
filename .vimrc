@@ -19,6 +19,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'klen/python-mode'
 Plugin 'rosenfeld/conque-term'
 Plugin 'vim-scripts/taglist.vim'
+Plugin 'szw/vim-ctrlspace' 
 call vundle#end()            " required
 filetype plugin indent on    " required
 syntax on

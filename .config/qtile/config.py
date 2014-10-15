@@ -105,7 +105,7 @@ keys = [
         ),
     Key(
         [mod], "d",
-        lazy.spawn("subl")
+        lazy.spawn("gvim")
         ),
     Key(
         [mod], "o",

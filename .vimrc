@@ -59,6 +59,10 @@ map <C-k><C-b> :NERDTreeToggle<CR>
 let g:ctrlp_match_window = 'bottom,order:ttb,min:10,max:30'
 let g:ctrlp_show_hidden = 1
 
+"CtrlSpace
+let g:ctrlspace_load_last_workspace_on_start = 1
+let g:ctrlspace_save_workspace_on_exit = 1
+
 "TagList
 let g:Tlist_Close_On_Select = 1
 let g:Tlist_GainFocus_On_ToggleOpen = 1
@@ -79,28 +83,24 @@ nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 colorscheme molokai
 
 map <C-q> :bd<CR>
+let loaded_matchparen = 0
 set list listchars=tab:\ \ ,trail:·
-set noshowmode
 set nowrap
 set bs=indent,eol,start
 set tabstop=4
 set shiftwidth=4
 set expandtab
-
 set scrolloff=2
 set number
-
-set showmatch
-set showmode
 set showcmd
-
 set ruler
 set title
 set wildmenu
 set matchpairs+=<:>
 set hidden
-set history=100
+set history=1000
 set laststatus=2
+set showmatch
 set matchtime=2
 set esckeys
 set smartindent

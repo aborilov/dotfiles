@@ -21,6 +21,7 @@ Plugin 'tomasr/molokai'
 Plugin 'rosenfeld/conque-term'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'szw/vim-ctrlspace' 
+Plugin 'mileszs/ack.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 syntax on
@@ -41,11 +42,8 @@ let g:pymode_syntax_all = 1
 let g:pymode_syntax_indent_errors = g:pymode_syntax_all
 let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
-"airline
-let g:airline#extensions#tabline#enabled = 1
-
 "YouCompleteMy
-let g:ycm_autoclose_preview_window_after_completion=1
+set completeopt-=preview
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "ConqueTerm
@@ -84,6 +82,7 @@ colorscheme molokai
 
 map <C-q> :bd<CR>
 let loaded_matchparen = 0
+set showtabline=0
 set list listchars=tab:\ \ ,trail:·
 set nowrap
 set bs=indent,eol,start

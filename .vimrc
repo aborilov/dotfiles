@@ -45,6 +45,7 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 "YouCompleteMy
 set completeopt-=preview
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
 "ConqueTerm
 let g:ConqueTerm_StartMessages = 0

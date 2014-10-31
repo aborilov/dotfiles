@@ -41,7 +41,7 @@ Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
-"Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Valloric/YouCompleteMe'
@@ -79,6 +79,7 @@ let g:ConqueTerm_StartMessages = 0
 nnoremap <leader>r :exe "ConqueTermSplit ipython -i " . expand("%")<CR>
 
 "NerdTree
+let g:NERDTreeQuitOnOpen=1
 map <C-k><C-b> :NERDTreeToggle<CR>
 
 "CtrlP
@@ -94,6 +95,7 @@ let g:Tlist_Close_On_Select = 1
 let g:Tlist_GainFocus_On_ToggleOpen = 1
 let g:Tlist_File_Fold_Auto_Close = 1
 nnoremap <leader>t :TlistToggle<CR>
+set tags+=./tags;/
 
 " ================ Turn Off Swap Files ==============
 

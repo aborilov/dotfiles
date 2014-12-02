@@ -35,7 +35,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
-"Bundle 'Raimondi/delimitMate'
+Bundle 'Raimondi/delimitMate'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
@@ -60,7 +60,7 @@ let g:pymode_run = 0
 let g:pymode_rope = 0
 let g:pymode_rope_completion = 0
 let g:pymode_rope_complete_on_dot = 0
-let g:pymode_lint = 1
+let g:pymode_lint = 0
 let g:pymode_lint_checker = "pyflakes,pep8"
 let g:pymode_lint_write = 1
 let g:pymode_folding = 0
@@ -85,6 +85,7 @@ map <C-k><C-b> :NERDTreeToggle<CR>
 "CtrlP
 let g:ctrlp_match_window = 'bottom,order:ttb,min:10,max:30'
 let g:ctrlp_show_hidden = 1
+imap <C-K> <Plug>delimitMateS-Tab
 
 "CtrlSpace
 let g:ctrlspace_load_last_workspace_on_start = 1
@@ -96,6 +97,9 @@ let g:Tlist_GainFocus_On_ToggleOpen = 1
 let g:Tlist_File_Fold_Auto_Close = 1
 nnoremap <leader>t :TlistToggle<CR>
 set tags+=./tags;/
+
+"NerdCommenter
+let g:NERDSpaceDelims=1
 
 " ================ Turn Off Swap Files ==============
 

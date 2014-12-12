@@ -23,7 +23,7 @@ syntax on
 
 " The mapleader has to be set before vundle starts loading all 
 " the plugins.
-let mapleader="\\"
+let mapleader="\<Space>"
 
 " =============== Vundle Initialization ===============
 " This loads all the plugins
@@ -52,7 +52,13 @@ Plugin 'rosenfeld/conque-term'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'szw/vim-ctrlspace' 
 Plugin 'mileszs/ack.vim'
+Plugin 'nathanaelkane/vim-indent-guides'
 call vundle#end()            " required
+
+"vim-indent-guides
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_guide_size=1
+let g:indent_guides_start_level=2
 
 "pymode
 let g:pymode = 1
@@ -85,7 +91,14 @@ map <C-k><C-b> :NERDTreeToggle<CR>
 "CtrlP
 let g:ctrlp_match_window = 'bottom,order:ttb,min:10,max:30'
 let g:ctrlp_show_hidden = 1
-imap <C-K> <Plug>delimitMateS-Tab
+let g:ctrlp_open_multiple_files = 'i'
+let ctrlp_filter_greps = "".
+    \ "egrep -iv '\\.(" .
+    \ "jar|class|swp|swo|log|so|o|pyc|jpe?g|png|gif|mo|po" .
+    \ ")$' | " .
+    \ "egrep -v '^(\\./)?(" .
+    \ "deploy/|lib/|classes/|libs/|deploy/vendor/|.git/|.hg/|.svn/|.*migrations/|docs/build/" .
+    \ ")'"
 
 "CtrlSpace
 let g:ctrlspace_load_last_workspace_on_start = 1
@@ -100,6 +113,9 @@ set tags+=./tags;/
 
 "NerdCommenter
 let g:NERDSpaceDelims=1
+
+"DelimitMate
+imap <C-K> <Plug>delimitMateS-Tab
 
 " ================ Turn Off Swap Files ==============
 
@@ -175,6 +191,7 @@ set showmatch
 set matchtime=2
 set esckeys
 set magic
+set cursorline
 set guifont=Inconsolata\ 14
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
@@ -183,9 +200,14 @@ set guioptions-=L  "remove left-hand scroll bar
 
 colorscheme molokai
 
+hi Cursor guibg=Green
+
 vnoremap < <gv
 vnoremap > >gv
 " Press Space to turn off highlighting and clear any message already displayed.
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 map <C-q> :bd<CR>
+
+nnoremap <leader>st :Gstatus<CR>
+nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 

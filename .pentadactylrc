@@ -1,0 +1,8 @@
+"1.2pre
+
+loadplugins '\.(js|penta)$'
+group user
+set showtabline=never
+colorscheme molokai
+
+" vim: set ft=pentadactyl:

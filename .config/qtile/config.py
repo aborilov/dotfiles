@@ -119,6 +119,10 @@ keys = [
         [mod], "c",
         lazy.spawn("notify-send _")
         ),
+    Key(
+        [mod], "b",
+        lazy.hide_show_bar()
+        ),
     Key([mod], "Return", lazy.spawn("urxvt -e screen -x -R")),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed

@@ -5,6 +5,7 @@ set nocompatible
 " ================ General Config ====================
 
 set nonumber                      "Line numbers are good
+set relativenumber
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
 set showcmd                     "Show incomplete cmds down the bottom
@@ -63,7 +64,7 @@ nnoremap <leader>a :Ack!<space>
 let g:ackprg = 'ack-grep --smart-case --nogroup --nocolor --column'
 
 "vim-indent-guides
-let g:indent_guides_enable_on_vim_startup=0
+let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_guide_size=1
 let g:indent_guides_start_level=2
 
@@ -112,6 +113,7 @@ let ctrlp_filter_greps = "".
 "CtrlSpace
 let g:ctrlspace_load_last_workspace_on_start = 1
 let g:ctrlspace_save_workspace_on_exit = 1
+au VimEnter * nested silent! exe "argdo e" | bn
 
 "TagList
 let g:Tlist_Close_On_Select = 1
@@ -122,6 +124,10 @@ set tags+=./tags;/
 
 "NerdCommenter
 let g:NERDSpaceDelims=1
+let NERDTreeIgnore = ['.vim$', '\~$', '.*\.pyc$', 'pip-log\.txt$', 'whoosh_index',
+                    \ 'xapian_index', '.*.pid', 'monitor.py', '.*-fixtures-.*.json',
+                    \ '.*\.o$', 'db.db', 'tags.bak', '.*\.pdf$', '.*\.mid$',
+                    \ '.*\.midi$']
 
 "DelimitMate
 imap <C-K> <Plug>delimitMateS-Tab
@@ -317,4 +323,4 @@ map <C-q> :bd<CR>
 nnoremap <leader>st :Gstatus<CR>
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 nnoremap <leader>w  :w<CR>
-
+nnoremap Q <nop>

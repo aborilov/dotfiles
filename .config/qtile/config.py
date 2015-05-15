@@ -123,7 +123,10 @@ keys = [
         [mod], "b",
         lazy.hide_show_bar()
         ),
-    Key([mod], "Return", lazy.spawn("urxvt -e screen -x -R")),
+    # Key([mod], "Return", lazy.spawn("urxvt -e screen -x -R")),
+    Key([mod], "Return", lazy.spawn("urxvt")),
+    # Key([mod], "Return", lazy.spawn("/tmp/1.sh")),
+    # Key([mod], "Return", lazy.spawn("screen -ls | head -n -2 | tail -n +2 | dmenu -l 5 | awk '{print \$1}' | awk -F. '{print \$2}' | xargs urxvt -e screen -R -x")),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with

@@ -1,8 +1,0 @@
-[
-    { "keys": ["ctrl+shift+pageup"], "command": "move_view_left" },
-    { "keys": ["ctrl+shift+pagedown"], "command": "move_view_right" },
-    { "keys": ["alt+m"], "command": "toggle_minimap"},
-    { "keys": ["ctrl+alt+f"], "command": "prompt_open_folder"},
-    { "keys": ["ctrl+alt+m"], "command": "toggle_menu" },
-{ "keys": ["ctrl+p"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true} },
-]

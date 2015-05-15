@@ -1,5 +1,6 @@
-urxvt.font:             -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1
-urxvt.boldFont:         -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1
+! urxvt.font:             -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1
+urxvt.font:             xft:Inconsolata-g\ for\ Powerline:size=13:antialias=true,xft:Consolas:size=13:antialias=true
+! urxvt.boldFont:         -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1
 urxvt.geometry:         80x25
 urxvt.saveLines:        1000
 urxvt.scrollBar:        false

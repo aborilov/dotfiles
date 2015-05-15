@@ -37,7 +37,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 Bundle 'Raimondi/delimitMate'
-Plugin 'kien/ctrlp.vim'
+" Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-surround'
@@ -49,12 +49,17 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'klen/python-mode'
 Plugin 'tomasr/molokai'
-Plugin 'rosenfeld/conque-term'
+" Plugin 'rosenfeld/conque-term'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'szw/vim-ctrlspace'
 Plugin 'mileszs/ack.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'edkolev/tmuxline.vim'
 call vundle#end()            " required
+
+"airline
+" let g:airline_powerline_fonts = 1
 
 "syntastic
 let g:syntastic_python_checkers = ['pyflakes', 'pep8']
@@ -98,17 +103,17 @@ nnoremap <leader>r :exe "ConqueTermSplit ipython -i " . expand("%")<CR>
 let g:NERDTreeQuitOnOpen=1
 map <C-k><C-b> :NERDTreeToggle<CR>
 
-"CtrlP
-let g:ctrlp_match_window = 'bottom,order:ttb,min:10,max:30'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_open_multiple_files = 'i'
-let ctrlp_filter_greps = "".
-    \ "egrep -iv '\\.(" .
-    \ "jar|class|swp|swo|log|so|o|pyc|jpe?g|png|gif|mo|po" .
-    \ ")$' | " .
-    \ "egrep -v '^(\\./)?(" .
-    \ "deploy/|lib/|classes/|libs/|deploy/vendor/|.git/|.hg/|.svn/|.*migrations/|docs/build/" .
-    \ ")'"
+" CtrlP
+" let g:ctrlp_match_window = 'bottom,order:ttb,min:10,max:30'
+" let g:ctrlp_show_hidden = 1
+" let g:ctrlp_open_multiple_files = 'i'
+" let ctrlp_filter_greps = "".
+    " \ "egrep -iv '\\.(" .
+    " \ "jar|class|swp|swo|log|so|o|pyc|jpe?g|png|gif|mo|po" .
+    " \ ")$' | " .
+    " \ "egrep -v '^(\\./)?(" .
+    " \ "deploy/|lib/|classes/|libs/|deploy/vendor/|.git/|.hg/|.svn/|.*migrations/|docs/build/" .
+    " \ ")'"
 
 "CtrlSpace
 let g:ctrlspace_load_last_workspace_on_start = 1
@@ -304,7 +309,7 @@ set matchtime=2
 set esckeys
 set magic
 set cursorline
-set guifont=Inconsolata\ 14
+set guifont=Inconsolata-g\ for\ Powerline\ Medium\ 14
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
@@ -324,3 +329,9 @@ nnoremap <leader>st :Gstatus<CR>
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 nnoremap <leader>w  :w<CR>
 nnoremap Q <nop>
+
+" Acts in command line line in bash
+:cnoremap <C-a>  <Home>
+:cnoremap <C-b>  <Left>
+:cnoremap <C-f>  <Right>
+:cnoremap <C-d>  <Delete>

@@ -59,7 +59,7 @@ Plugin 'edkolev/tmuxline.vim'
 call vundle#end()            " required
 
 "airline
-" let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 1
 
 "syntastic
 let g:syntastic_python_checkers = ['pyflakes', 'pep8']
@@ -309,7 +309,7 @@ set matchtime=2
 set esckeys
 set magic
 set cursorline
-set guifont=Inconsolata-g\ for\ Powerline\ Medium\ 14
+set guifont=Inconsolata\ for\ Powerline\ Medium\ 14
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar

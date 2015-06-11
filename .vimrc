@@ -56,8 +56,11 @@ Plugin 'mileszs/ack.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'edkolev/tmuxline.vim'
+Plugin 'sjl/gundo.vim'
 call vundle#end()            " required
 
+"gundo
+nnoremap <leader>u :GundoToggle<CR>
 "airline
 let g:airline_powerline_fonts = 1
 

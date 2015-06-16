@@ -57,10 +57,19 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'sjl/gundo.vim'
+Plugin 'benmills/vimux'
 call vundle#end()            " required
+
+
+"vimux
+" Run the current file with python
+map <Leader>rp :call VimuxRunCommand("clear; python " . bufname("%"))<CR>
+" Run last command executed by VimuxRunCommand
+map <Leader>vl :VimuxRunLastCommand<CR>
 
 "gundo
 nnoremap <leader>u :GundoToggle<CR>
+
 "airline
 let g:airline_powerline_fonts = 1
 

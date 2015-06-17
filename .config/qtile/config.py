@@ -126,11 +126,10 @@ keys = [
     # Key([mod], "Return", lazy.spawn("urxvt -e screen -x -R")),
     # Key([mod], "Return", lazy.spawn("sh -c \"tmux ls -F '#{session_name}' | \
                                     # dmenu -l 7\" ")),
-    Key([mod], "Return", lazy.spawn("""bash -c \"tmux ls -F '#{session_name}' | \
-                                    dmenu -l 7 | xargs -I{} bash -c \
-                                    \\\"if [ '{}' == 'new' ]; \
-                                    then urxvtcd -e tmux ;\
-                                    else urxvtcd -e tmux attach -t {};fi\\\"\"""")),
+    Key([mod], "Return", lazy.spawn("""sh -c "tmux ls -F '#{session_name}' \
+                                    | dmenu -l 7 | xargs -I{} urxvtcd -e \
+                                    sh -c 'tmux attach -t {} || \
+                                    tmux new -s {}'" """)),
     # Key([mod], "Return", lazy.spawn("urxvt")),
     # Key([mod], "Return", lazy.spawn("/tmp/1.sh")),
     # Key([mod], "Return", lazy.spawn("screen -ls | head -n -2 | tail -n +2 | dmenu -l 5 | awk '{print \$1}' | awk -F. '{print \$2}' | xargs urxvt -e screen -R -x")),

@@ -347,3 +347,5 @@ nnoremap Q <nop>
 :cnoremap <C-b>  <Left>
 :cnoremap <C-f>  <Right>
 :cnoremap <C-d>  <Delete>
+
+set timeoutlen=250

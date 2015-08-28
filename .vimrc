@@ -4,8 +4,9 @@ set nocompatible
 
 " ================ General Config ====================
 
-set nonumber                      "Line numbers are good
+" set nonumber                      "Line numbers are good
 set relativenumber
+set number                      "Line numbers are good
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
 set showcmd                     "Show incomplete cmds down the bottom
@@ -58,12 +59,28 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'sjl/gundo.vim'
 Plugin 'benmills/vimux'
+" Plugin 'ryanoasis/vim-devicons'
+Plugin 'lyokha/vim-xkbswitch'
 call vundle#end()            " required
 
+"xkbswitch
+let g:XkbSwitchEnabled = 1
+
+"devicons
+" let g:webdevicons_enable = 0
+" if has("gui_running")
+    " let g:webdevicons_enable = 1
+" endif
 
 "vimux
 " Run the current file with python
+function! VimuxSlime()
+    call VimuxSendText(@v)
+    call VimuxSendKeys("Enter")
+endfunction
 map <Leader>rp :call VimuxRunCommand("clear; python " . bufname("%"))<CR>
+vmap <Leader>vs "vy :call VimuxSlime()<CR>
+nmap <Leader>vs vip<Leader>pp<CR>
 " Run last command executed by VimuxRunCommand
 map <Leader>vl :VimuxRunLastCommand<CR>
 
@@ -321,7 +338,7 @@ set matchtime=2
 set esckeys
 set magic
 set cursorline
-set guifont=Inconsolata\ for\ Powerline\ Medium\ 14
+set guifont=Inconsolata\ LGC\ for\ Powerline\ Plus\ Nerd\ File\ Types\ Medium\ 13
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar

@@ -101,7 +101,7 @@ keys = [
         ),
     Key(
         [mod], "n",
-        lazy.spawn("firefox")
+        lazy.spawn("python /home/pavel/nmcli.py")
         ),
     Key(
         [mod], "d",

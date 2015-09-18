@@ -1,0 +1,150 @@
+# Path
+set alias_file=~/.mutt/aliases
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
+set mailcap_path = ~/.mutt/mailcap
+
+#======================================================#
+set use_from = yes
+set envelope_from ="yes"
+
+set smtp_url = "smtp://aborilov@smtp.gmail.com:587/"
+set smtp_pass = ""
+set from = "aborilov@gmail.com"
+set realname = "Aborilov Pavel"
+
+set move = no
+
+##======================================================#
+## Basic
+set folder = ~/.mail/aborilov.com # mailbox location
+
+set wait_key = no        # shut up, mutt
+set mbox_type = Maildir  # mailbox type
+set timeout = 3          # idle time before scanning
+set mail_check = 0       # minimum time between scans
+unset move               # gmail does that
+set delete               # don't ask, just do
+unset confirmappend      # don't ask, just do!
+set quit                 # don't ask, just do!!
+unset mark_old           # read/new is good enough for me
+set beep_new             # bell on new mails
+set pipe_decode          # strip headers and eval mimes when piping
+set thorough_search      # strip headers and eval mimes before searching
+# set folder="~/Mail"                # Mailboxes in here
+# set record="+sent"                 # where to store sent messages
+# set postponed="+postponed"         # where to store draft messages
+# set move=no                        # Don't move mail from the spool.
+
+
+# Default inbox.
+set spoolfile = "+INBOX"
+
+# Mailboxes to show in the sidebar.
+mailboxes +INBOX \
+          +archive \
+          +sent \
+          +drafts \
+          +trash \
+
+# Other special folders.
+set mbox      = "+aborilov.com/archive"
+set postponed = "+aborilov.com/drafts"
+
+# Status Bar
+set status_chars  = " *%A"
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+
+##======================================================#
+## Index View Options
+set date_format = "%m/%d"
+set index_format = "[%Z]  %D  %-20.20F  %s"
+set sort = threads                         # like gmail
+set sort_aux = reverse-last-date-received  # like gmail
+set uncollapse_jump                        # don't collapse on an unread message
+set sort_re                                # thread based on regex
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+set folder_format = "%2C %t %N %8s %f"
+
+##======================================================#
+# Headers
+
+ignore *                                # ignore all headers
+unignore from: to: cc: date: subject:   # show only these
+unhdr_order *
+hdr_order from: to: cc: date: subject:  # and in this order
+
+#======================================================#
+# which editor do you want to use? 
+# vim of course!
+set editor = "vim -c 'normal! }' -c 'redraw'"
+set edit_headers          # See the headers when editing
+
+#======================================================#
+# Aliases
+
+set sort_alias=alias     # sort aliases in alpha order by alias name
+set reverse_alias = yes
+source $alias_file
+
+#======================================================#
+# Odds and ends
+set markers          # mark wrapped lines of text in the pager with a +
+set smart_wrap       # Don't wrap mid-word
+set pager_context=5  # Retain 5 lines of previous page when scrolling.
+set status_on_top    # Status bar on top.
+push <show-version>  # Shows mutt version at startup
+
+auto_view text/html
+
+set query_command = "goobook query '%s'"
+bind editor <Tab> complete-query
+
+# Index
+bind index <space>  collapse-thread
+bind index <tab>    sync-mailbox
+bind index k        previous-entry
+bind index j        next-entry
+bind index gg       first-entry
+bind index G        last-entry
+
+# Sync email
+macro index O "<shell-escape>offlineimap<enter>"           "run offlineimap to sync all mail"
+macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to sync inbox"
+
+# Pager
+bind pager \# noop
+bind pager k  previous-line
+bind pager j  next-line
+bind pager gg top
+bind pager G  bottom
+
+# "Open in Vim"
+
+macro index,pager V "|vim -c 'setlocal ft=mail' -c 'setlocal buftype=nofile' -<enter>"              "open in vim"
+
+# Sidebar Patch 
+
+# set sidebar_delim   = '│'
+set sidebar_visible = yes
+set sidebar_width   = 26
+# color sidebar_new color221 color233
+bind index,pager <down>   sidebar-next
+bind index,pager <up>     sidebar-prev
+bind index,pager <right>  sidebar-open
+#
+# Mark all as read
+macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
+
+# Saner copy/move dialogs
+macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
+macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
+macro index,pager \Cd "<save-message>=trash<enter><refresh>" "Trash Message"
+
+macro index gi "<change-folder>=INBOX<enter>" "Go to all mail"
+macro index ga "<change-folder>=archive<enter>" "Go to all mail"
+macro index gs "<change-folder>=sent<enter>" " Go to sent mail"
+macro index gd "<change-folder>=drafts<enter>" "Go to drafts"
+
+source ~/.mutt/mutt-colors-solarized-dark-256.muttrc

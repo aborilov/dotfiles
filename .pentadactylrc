@@ -3,6 +3,6 @@
 loadplugins '\.(js|penta)$'
 group user
 set showtabline=never
-colorscheme molokai
+colorscheme solarized-dark
 
 " vim: set ft=pentadactyl:

@@ -38,7 +38,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 Bundle 'Raimondi/delimitMate'
-" Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-surround'
@@ -50,7 +49,6 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'klen/python-mode'
 Plugin 'tomasr/molokai'
-" Plugin 'rosenfeld/conque-term'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'szw/vim-ctrlspace'
 Plugin 'mileszs/ack.vim'
@@ -59,7 +57,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'sjl/gundo.vim'
 Plugin 'benmills/vimux'
-" Plugin 'ryanoasis/vim-devicons'
+Plugin 'ryanoasis/vim-devicons'
 Plugin 'lyokha/vim-xkbswitch'
 call vundle#end()            " required
 
@@ -67,10 +65,10 @@ call vundle#end()            " required
 let g:XkbSwitchEnabled = 1
 
 "devicons
-" let g:webdevicons_enable = 0
-" if has("gui_running")
-    " let g:webdevicons_enable = 1
-" endif
+let g:webdevicons_enable = 0
+if has("gui_running")
+    let g:webdevicons_enable = 1
+endif
 
 "vimux
 " Run the current file with python
@@ -124,29 +122,14 @@ set completeopt-=preview
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
-"ConqueTerm
-let g:ConqueTerm_StartMessages = 0
-nnoremap <leader>r :exe "ConqueTermSplit ipython -i " . expand("%")<CR>
-
 "NerdTree
 let g:NERDTreeQuitOnOpen=1
 map <C-k><C-b> :NERDTreeToggle<CR>
 
-" CtrlP
-" let g:ctrlp_match_window = 'bottom,order:ttb,min:10,max:30'
-" let g:ctrlp_show_hidden = 1
-" let g:ctrlp_open_multiple_files = 'i'
-" let ctrlp_filter_greps = "".
-    " \ "egrep -iv '\\.(" .
-    " \ "jar|class|swp|swo|log|so|o|pyc|jpe?g|png|gif|mo|po" .
-    " \ ")$' | " .
-    " \ "egrep -v '^(\\./)?(" .
-    " \ "deploy/|lib/|classes/|libs/|deploy/vendor/|.git/|.hg/|.svn/|.*migrations/|docs/build/" .
-    " \ ")'"
-
 "CtrlSpace
-let g:ctrlspace_load_last_workspace_on_start = 1
-let g:ctrlspace_save_workspace_on_exit = 1
+let g:CtrlSpaceSaveWorkspaceOnExit = 1
+let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
+let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
 au VimEnter * nested silent! exe "argdo e" | bn
 
 "TagList
@@ -344,7 +327,10 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
-colorscheme molokai
+" set t_Co=256
+" let g:solarized_termcolors=256
+set background=dark
+colorscheme solarized
 
 hi Cursor guibg=Green
 
@@ -366,3 +352,11 @@ nnoremap Q <nop>
 :cnoremap <C-d>  <Delete>
 
 set timeoutlen=250
+
+" Only show linenumber in the current window
+
+augroup nline
+    au!
+    au WinLeave * set nonumber | set norelativenumber
+    au WinEnter * set number | set relativenumber
+augroup END

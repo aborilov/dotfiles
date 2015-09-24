@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ $1 = "MSG" ]; then
+    if [ $2 = "IN" ]; then
+        notify-send $3 $4
+    fi
+fi

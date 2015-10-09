@@ -1,6 +1,8 @@
 ! urxvt.font:             -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1
-urxvt.font:             xft:Inconsolata LGC for Powerline:style=Medium:size=12:antialias=true
-! urxvt.boldFont:         -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1
+! urxvt.font:             xft:Inconsolata LGC for Powerline:style=Medium:size=12:antialias=true
+urxvt.font:             xft:Inconsolata LGC for Powerline Plus Nerd File Types Mono:style=Medium:size=12:antialias=true
+! urxvt.font:             xft:Inconsolata for Powerline:style=Medium:size=14:antialias=true
+! urxvt.font:               -misc-inconsolata g for powerline-medium-r-normal--0-0-0-0-m-0-iso10646-1
 urxvt.geometry:         80x25
 urxvt.saveLines:        1000
 urxvt.scrollBar:        false
@@ -20,9 +22,9 @@ urxvt.intensityStyles: false
 #define S_base2         #eee8d5
 #define S_base3         #fdf6e3
 
-*background:            S_base02
+*background:            S_base03
 *foreground:            S_base0
-*fadeColor:             S_base02
+*fadeColor:             S_base03
 *cursorColor:           S_base1
 *pointerColorBackground:S_base01
 *pointerColorForeground:S_base1

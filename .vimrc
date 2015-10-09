@@ -64,12 +64,6 @@ call vundle#end()            " required
 "xkbswitch
 let g:XkbSwitchEnabled = 1
 
-"devicons
-let g:webdevicons_enable = 0
-if has("gui_running")
-    let g:webdevicons_enable = 1
-endif
-
 "vimux
 " Run the current file with python
 function! VimuxSlime()
@@ -321,7 +315,7 @@ set matchtime=2
 set esckeys
 set magic
 set cursorline
-set guifont=Inconsolata\ LGC\ for\ Powerline\ Plus\ Nerd\ File\ Types\ Medium\ 13
+set guifont=Inconsolata\ LGC\ for\ Powerline\ Plus\ Nerd\ File\ Types\ Mono\ Medium\ 13
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar

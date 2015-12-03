@@ -5,16 +5,16 @@
 # - Empty lines and lines beginning with a '#' are ignored.
 
 # Please provide your Jabber (XMPP) identifier:
-set jid = aborilov@gmail.com
+set jid = aborilov@cloudlinux.xmpp.slack.com
 
 # If password is not given, it will be interactively asked for.
 # Note: if the password contains leading or trailing spaces, you must
 # enclose it with quotes: set password = " example password "
-set password =  lapkivycswglbzhf
+set password = 
 
 # You can provide a server name if you want mcabber to connect
 # to a specific server.
-#set server = talk.google.com
+set server = cloudlinux.xmpp.slack.com
 
 # To automatically append the server to the JID in say_to, use this option:
 #set default_server = jabber.org
@@ -74,7 +74,7 @@ set ssl_ignore_checks = 1
 # This nickname is used when joining a room, when no nick is explicitly
 # specified by the user.  Note that when the nickname option is not set,
 # the jid variable can be used.
-#set nickname = Abitbol
+set nickname = aborilov
 
 # Proxy
 # mcabber can use a proxy if it supports the CONNECT method
@@ -541,6 +541,13 @@ alias dnd      = status dnd
 alias notavail = status notavail
 #alias names = room names
 #alias topic = room topic
+#
+alias general = room join general@conference.cloudlinux.xmpp.slack.com
+alias random = room join random@conference.cloudlinux.xmpp.slack.com
+alias we_are_cloudlinux = room join we_are_cloudlinux@conference.cloudlinux.xmpp.slack.com
+alias kuberdock_dev = room join kuberdock-_dev_@conference.cloudlinux.xmpp.slack.com
+alias kuberdock2 = room join kuberdock-st2@conference.cloudlinux.xmpp.slack.com
+alias kuberdock = room join kuberdock@conference.cloudlinux.xmpp.slack.com
 
 # Set use_mouse to 1 to map mouse buttons like keycodes.
 #set use_mouse = 1

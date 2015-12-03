@@ -10,7 +10,7 @@ set jid = aborilov@gmail.com
 # If password is not given, it will be interactively asked for.
 # Note: if the password contains leading or trailing spaces, you must
 # enclose it with quotes: set password = " example password "
-set password =  lapkivycswglbzhf
+set password =  
 
 # You can provide a server name if you want mcabber to connect
 # to a specific server.

@@ -59,6 +59,10 @@ Plugin 'sjl/gundo.vim'
 Plugin 'benmills/vimux'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'lyokha/vim-xkbswitch'
+Plugin 'machakann/vim-sandwich'
+Plugin 'pearofducks/ansible-vim'
+Plugin 'fatih/vim-go'
+Plugin 'vim-airline/vim-airline-themes'
 call vundle#end()            " required
 
 "xkbswitch
@@ -71,8 +75,10 @@ function! VimuxSlime()
     call VimuxSendKeys("Enter")
 endfunction
 map <Leader>rp :call VimuxRunCommand("clear; python " . bufname("%"))<CR>
+map <Leader>dp :!./.deploy.sh<CR>
 vmap <Leader>vs "vy :call VimuxSlime()<CR>
-nmap <Leader>vs vip<Leader>pp<CR>
+nmap <Leader>vs ggVG"vy :call VimuxSlime()<CR>
+" nmap <Leader>vs vip<Leader>pp<CR>
 " Run last command executed by VimuxRunCommand
 map <Leader>vl :VimuxRunLastCommand<CR>
 
@@ -84,10 +90,12 @@ let g:airline_powerline_fonts = 1
 
 "syntastic
 let g:syntastic_python_checkers = ['pyflakes', 'pep8']
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " Ack 
 nnoremap <leader>a :Ack!<space>
-let g:ackprg = 'ack-grep --smart-case --nogroup --nocolor --column'
+let g:ackprg = 'ack --smart-case --nogroup --nocolor --column'
 
 "vim-indent-guides
 let g:indent_guides_enable_on_vim_startup=1
@@ -315,7 +323,7 @@ set matchtime=2
 set esckeys
 set magic
 set cursorline
-set guifont=Inconsolata\ LGC\ for\ Powerline\ Plus\ Nerd\ File\ Types\ Mono\ Medium\ 13
+set guifont=Inconsolata\ LGC\ for\ Powerline\ Plus\ Nerd\ File\ Types\ Mono:h13
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar

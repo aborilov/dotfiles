@@ -14,7 +14,9 @@ application/vnd.ms-exc; ~/.mutt/view_attachment.sh %s
 application/vnd.ms-excel; ~/.mutt/view_attachment.sh %s
 
 # MS Word
-application/msword; ~/.mutt/view_attachment.sh %s "-" 'lowriter'
+# application/msword; ~/.mutt/view_attachment.sh %s "-" 'lowriter'
+# MS Word documents
+application/msword; ~/.mutt/view_attachment.sh %s "-" '/Applications/TextEdit.app'
 
 # Images
 image/jpg; ~/.mutt/view_attachment.sh %s jpg
@@ -24,7 +26,7 @@ image/png; ~/.mutt/view_attachment.sh %s png
 image/gif; ~/.mutt/view_attachment.sh %s gif
 
 # PDF
-# application/pdf; ~/.mutt/view_attachment.sh %s pdf
+application/pdf; ~/.mutt/view_attachment.sh %s pdf
 
 # HTML
 text/html; ~/.mutt/view_attachment.sh %s html

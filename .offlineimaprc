@@ -1,16 +1,23 @@
 [general]
 ui = ttyui
-accounts = AborilovPavel
+accounts = aborilov, cloudlinux
+pythonfile=~/.mutt/offlineimap.py
 /* pythonfile=~/.mutt/offlineimap.py */
 fsync = False
 
-[Account AborilovPavel]
-localrepository = AborilovPavel-Local
-remoterepository = AborilovPavel-Remote
+[Account aborilov]
+localrepository = aborilov-Local
+remoterepository = aborilov-Remote
 status_backend = sqlite
 /* postsynchook = notmuch new */
 
-[Repository AborilovPavel-Local]
+[Account cloudlinux]
+localrepository = cloudlinux-Local
+remoterepository = cloudlinux-Remote
+status_backend = sqlite
+/* postsynchook = notmuch new */
+
+[Repository aborilov-Local]
 type = Maildir
 localfolders = ~/.mail/aborilov.com
 nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
@@ -21,11 +28,22 @@ nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
                             'archive': '[Gmail]/All Mail',
                             }.get(folder, folder)
 
-[Repository AborilovPavel-Remote]
+[Repository cloudlinux-Local]
+type = Maildir
+localfolders = ~/.mail/cloudlinux
+nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
+                            'sent':    '[Gmail]/Sent Mail',
+                            'flagged': '[Gmail]/Starred',
+                            'trash':   '[Gmail]/Trash',
+                            'spam':    '[Gmail]/Spam',
+                            'archive': '[Gmail]/All Mail',
+                            }.get(folder, folder)
+
+[Repository cloudlinux-Remote]
 maxconnections = 1
 type = Gmail
-remoteuser = aborilov@gmail.com
-remotepass = 
+remoteuser = paborilov@cloudlinux.com
+remotepasseval = get_keychain_pass(account="paborilov@cloudlinux.com", server="imap.cloudlinux.com")
 realdelete = no
 nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
                             '[Gmail]/Sent Mail': 'sent',
@@ -36,7 +54,27 @@ nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
                             }.get(folder, folder)
 folderfilter = lambda folder: folder not in ['[Gmail]/Important',
                                              ]
-sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+ssl=true
+sslcacertfile = /usr/local/etc/openssl/cert.pem
+
+[Repository aborilov-Remote]
+maxconnections = 1
+type = Gmail
+remoteuser = aborilov@gmail.com
+remotepasseval = get_keychain_pass(account="aborilov@gmail.com", server="imap.gmail.com")
+realdelete = no
+nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
+                            '[Gmail]/Sent Mail': 'sent',
+                            '[Gmail]/Starred':   'flagged',
+                            '[Gmail]/Trash':     'trash',
+                            '[Gmail]/Spam':      'spam',
+                            '[Gmail]/All Mail':  'archive',
+                            }.get(folder, folder)
+folderfilter = lambda folder: folder not in ['[Gmail]/Important',
+                                             ]
+ssl=true
+sslcacertfile = /usr/local/etc/openssl/cert.pem
+/* cert_fingerprint=f3043dd689a2e7dddfbef82703a6c65ea9b634c1 */
 
 [mbnames]
 enable = yes
@@ -45,37 +83,3 @@ header = "mailboxes "
 peritem = "+%(accountname)s/%(foldername)s"
 sep = " "
 footer = "\n"
-
-# [Account Simple]
-# localrepository = Simple-Local
-# remoterepository = Simple-Remote
-# status_backend = sqlite
-# postsynchook = notmuch new
-# 
-# [Repository Simple-Local]
-# type = Maildir
-# localfolders = ~/.mail/simple
-# nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
-#                             'sent':    '[Gmail]/Sent Mail',
-#                             'flagged': '[Gmail]/Starred',
-#                             'trash':   '[Gmail]/Trash',
-#                             'archive': '[Gmail]/All Mail',
-#                             }.get(folder, folder)
-# 
-# [Repository Simple-Remote]
-# maxconnections = 1
-# type = Gmail
-# remoteuser = sjl@simple.com
-# remotepasseval = get_keychain_pass(account="sjl@simple.com", server="imap.gmail.com")
-# realdelete = no
-# nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
-#                             '[Gmail]/Sent Mail': 'sent',
-#                             '[Gmail]/Starred':   'flagged',
-#                             '[Gmail]/Trash':     'trash',
-#                             '[Gmail]/All Mail':  'archive',
-#                             }.get(folder, folder)
-# folderfilter = lambda folder: folder not in ['[Gmail]/Trash',
-#                                              '[Gmail]/Important',
-#                                              '[Gmail]/Spam',
-#                                              ]
-

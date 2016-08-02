@@ -1,0 +1,16 @@
+# vim: ft=muttrc
+set from = "paborilov@cloudlinux.com"
+set sendmail = "/usr/local/bin/msmtp -a cloudlinux"
+# Other special folders.
+set mbox      = "+cloudlinux/archive"
+set postponed = "+cloudlinux/drafts"
+# Sync email
+macro index O "<shell-escape>offlineimap -a cloudlinux<enter>"           "run offlineimap to sync all mail"
+macro index o "<shell-escape>offlineimap -a cloudlinux -qf INBOX<enter>" "run offlineimap to sync inbox"
+macro index,pager \Cd "<save-message>+cloudlinux/trash<enter><refresh>" "Trash Message"
+macro index ,c "<change-folder>+aborilov.com/INBOX<enter>" "change accounts"
+
+macro index gi "<change-folder>+cloudlinux/INBOX<enter>" "Go to all mail"
+macro index ga "<change-folder>+cloudlinux/archive<enter>" "Go to all mail"
+macro index gs "<change-folder>+cloudlinux/sent<enter>" " Go to sent mail"
+macro index gd "<change-folder>+cloudlinux/drafts<enter>" "Go to drafts"

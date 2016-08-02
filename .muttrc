@@ -7,18 +7,15 @@ set mailcap_path = ~/.mutt/mailcap
 
 #======================================================#
 set use_from = yes
-set envelope_from ="yes"
 
-set smtp_url = "smtp://aborilov@smtp.gmail.com:587/"
-set smtp_pass = ""
-set from = "aborilov@gmail.com"
-set realname = "Aborilov Pavel"
+set sendmail_wait = 0
+unset record
 
 set move = no
 
 ##======================================================#
 ## Basic
-set folder = ~/.mail/aborilov.com # mailbox location
+set folder = ~/.mail # mailbox location
 
 set wait_key = no        # shut up, mutt
 set mbox_type = Maildir  # mailbox type
@@ -39,18 +36,24 @@ set thorough_search      # strip headers and eval mimes before searching
 
 
 # Default inbox.
-set spoolfile = "+INBOX"
+set spoolfile = "+aborilov.com/INBOX"
+folder-hook aborilov.com/*       source ~/.mutt/accounts/gmail
+folder-hook cloudlinux/* source ~/.mutt/accounts/cloudlinux
+
+source ~/.mutt/accounts/gmail # default account
 
 # Mailboxes to show in the sidebar.
-mailboxes +INBOX \
-          +archive \
-          +sent \
-          +drafts \
-          +trash \
+mailboxes +aborilov.com/INBOX \
+          +aborilov.com/archive \
+          +aborilov.com/sent \
+          +aborilov.com/drafts \
+          +aborilov.com/trash \
+          +cloudlinux/INBOX \
+          +cloudlinux/archive \
+          +cloudlinux/sent \
+          +cloudlinux/drafts \
+          +cloudlinux/trash \
 
-# Other special folders.
-set mbox      = "+aborilov.com/archive"
-set postponed = "+aborilov.com/drafts"
 
 # Status Bar
 set status_chars  = " *%A"
@@ -79,8 +82,7 @@ hdr_order from: to: cc: date: subject:  # and in this order
 # which editor do you want to use? 
 # vim of course!
 set editor = "vim -c 'normal! }' -c 'redraw'"
-set edit_headers          # See the headers when editing
-
+bind compose p postpone-message
 #======================================================#
 # Aliases
 
@@ -98,8 +100,9 @@ push <show-version>  # Shows mutt version at startup
 
 auto_view text/html
 
-set query_command = "goobook query '%s'"
+set query_command = "contacts -Sf '%eTOKEN%n' '%s' | sed -e 's/TOKEN/\t/g'"
 bind editor <Tab> complete-query
+bind editor ^T    complete
 
 # Index
 bind index <space>  collapse-thread
@@ -108,10 +111,21 @@ bind index k        previous-entry
 bind index j        next-entry
 bind index gg       first-entry
 bind index G        last-entry
+bind index R        group-reply
 
-# Sync email
-macro index O "<shell-escape>offlineimap<enter>"           "run offlineimap to sync all mail"
-macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to sync inbox"
+bind index N search-opposite
+bind pager N search-opposite
+
+# Pager View Options ---------------------------------
+set pager_index_lines = 10 # number of index lines to show
+set pager_context = 3      # number of context lines to show
+set pager_stop             # don't go to next message automatically
+set menu_scroll            # scroll in menus
+set tilde                  # show tildes like in vim
+unset markers              # no ugly plus signs
+
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+alternative_order text/plain text/enriched text/html]])
 
 # Pager
 bind pager \# noop
@@ -120,9 +134,32 @@ bind pager j  next-line
 bind pager gg top
 bind pager G  bottom
 
+bind pager R  group-reply
+
+# View attachments properly.
+bind attach <return> view-mailcap
+
+macro pager \Cu "|urlview<enter>" "call urlview to open links"
+
 # "Open in Vim"
 
 macro index,pager V "|vim -c 'setlocal ft=mail' -c 'setlocal buftype=nofile' -<enter>"              "open in vim"
+
+# Compose View Options -------------------------------
+set envelope_from                    # which from?
+set sig_dashes                       # dashes before sig
+set edit_headers                     # show headers when composing
+set fast_reply                       # skip to compose when replying
+set askcc                            # ask for CC:
+set fcc_attach                       # save attachments with the body
+unset mime_forward                   # forward attachments as part of body
+set forward_format = "Fwd: %s"       # format of subject when forwarding
+set forward_decode                   # decode when forwarding
+set attribution = "On %d, %n wrote:" # format of quoting header
+set reply_to                         # reply to Reply to: field
+set reverse_name                     # reply as whomever it was to
+set include                          # include message in replies
+set forward_quote                    # include message in forwards
 
 # Sidebar Patch 
 
@@ -140,11 +177,6 @@ macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "ma
 # Saner copy/move dialogs
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
-macro index,pager \Cd "<save-message>=trash<enter><refresh>" "Trash Message"
 
-macro index gi "<change-folder>=INBOX<enter>" "Go to all mail"
-macro index ga "<change-folder>=archive<enter>" "Go to all mail"
-macro index gs "<change-folder>=sent<enter>" " Go to sent mail"
-macro index gd "<change-folder>=drafts<enter>" "Go to drafts"
 
 source ~/.mutt/mutt-colors-solarized-dark-256.muttrc

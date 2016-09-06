@@ -4,6 +4,7 @@ set sendmail = "/usr/local/bin/msmtp -a cloudlinux"
 # Other special folders.
 set mbox      = "+cloudlinux/archive"
 set postponed = "+cloudlinux/drafts"
+set signature         = ~/.mutt/accounts/cloudlinux_sig
 # Sync email
 macro index O "<shell-escape>offlineimap -a cloudlinux<enter>"           "run offlineimap to sync all mail"
 macro index o "<shell-escape>offlineimap -a cloudlinux -qf INBOX<enter>" "run offlineimap to sync inbox"

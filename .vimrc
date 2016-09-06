@@ -63,7 +63,18 @@ Plugin 'machakann/vim-sandwich'
 Plugin 'pearofducks/ansible-vim'
 Plugin 'fatih/vim-go'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tpope/vim-unimpaired'
 call vundle#end()            " required
+
+"vim-go
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <Leader>hd <Plug>(go-doc)
+au FileType go nmap <Leader>s <Plug>(go-implements)
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>e <Plug>(go-rename)
+let g:go_fmt_command = "goimports"
 
 "xkbswitch
 let g:XkbSwitchEnabled = 1
@@ -92,6 +103,7 @@ let g:airline_powerline_fonts = 1
 let g:syntastic_python_checkers = ['pyflakes', 'pep8']
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:go_list_type = "quickfix"
 
 " Ack 
 nnoremap <leader>a :Ack!<space>
@@ -119,7 +131,7 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 nnoremap <leader>lf :PymodeLintAuto<CR>
 nnoremap <leader>lc :PymodeLint<CR>
 
-"YouCompleteMy
+"YouCompleteMe
 set completeopt-=preview
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"

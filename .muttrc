@@ -48,7 +48,9 @@ mailboxes +aborilov.com/INBOX \
           +aborilov.com/sent \
           +aborilov.com/drafts \
           +aborilov.com/trash \
+          "+----CLOUDLINUX----" \
           +cloudlinux/INBOX \
+          +cloudlinux/gerrit \
           +cloudlinux/archive \
           +cloudlinux/sent \
           +cloudlinux/drafts \
@@ -165,7 +167,7 @@ set forward_quote                    # include message in forwards
 
 # set sidebar_delim   = '│'
 set sidebar_visible = yes
-set sidebar_width   = 26
+set sidebar_width   = 22
 # color sidebar_new color221 color233
 bind index,pager <down>   sidebar-next
 bind index,pager <up>     sidebar-prev

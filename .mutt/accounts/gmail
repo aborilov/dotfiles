@@ -4,6 +4,7 @@ set sendmail = "/usr/local/bin/msmtp -a aborilov"
 # Other special folders.
 set mbox      = "+aborilov.com/archive"
 set postponed = "+aborilov.com/drafts"
+set signature         = ~/.mutt/accounts/gmail_sig
 # Sync email
 macro index O "<shell-escape>offlineimap -a aborilov<enter>"           "run offlineimap to sync all mail"
 macro index o "<shell-escape>offlineimap -a aborilov -qf INBOX<enter>" "run offlineimap to sync inbox"

@@ -344,7 +344,11 @@ set guioptions-=L  "remove left-hand scroll bar
 " set t_Co=256
 " let g:solarized_termcolors=256
 set background=dark
-colorscheme solarized
+try
+    colorscheme solarized
+catch
+    colorscheme default
+endtry
 
 hi Cursor guibg=Green
 

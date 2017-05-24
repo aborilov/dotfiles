@@ -20,7 +20,7 @@ set folder = ~/.mail # mailbox location
 set wait_key = no        # shut up, mutt
 set mbox_type = Maildir  # mailbox type
 set timeout = 3          # idle time before scanning
-set mail_check = 0       # minimum time between scans
+set mail_check = 5       # minimum time between scans
 unset move               # gmail does that
 set delete               # don't ask, just do
 unset confirmappend      # don't ask, just do!
@@ -38,7 +38,6 @@ set thorough_search      # strip headers and eval mimes before searching
 # Default inbox.
 set spoolfile = "+aborilov.com/INBOX"
 folder-hook aborilov.com/*       source ~/.mutt/accounts/gmail
-folder-hook cloudlinux/* source ~/.mutt/accounts/cloudlinux
 
 source ~/.mutt/accounts/gmail # default account
 
@@ -48,14 +47,6 @@ mailboxes +aborilov.com/INBOX \
           +aborilov.com/sent \
           +aborilov.com/drafts \
           +aborilov.com/trash \
-          "+----CLOUDLINUX----" \
-          +cloudlinux/INBOX \
-          +cloudlinux/gerrit \
-          +cloudlinux/archive \
-          +cloudlinux/sent \
-          +cloudlinux/drafts \
-          +cloudlinux/trash \
-
 
 # Status Bar
 set status_chars  = " *%A"
@@ -102,7 +93,8 @@ push <show-version>  # Shows mutt version at startup
 
 auto_view text/html
 
-set query_command = "contacts -Sf '%eTOKEN%n' '%s' | sed -e 's/TOKEN/\t/g'"
+# set query_command = "contacts -Sf '%eTOKEN%n' '%s' | sed -e 's/TOKEN/\t/g'"
+set query_command = "goobook query '%s'"
 bind editor <Tab> complete-query
 bind editor ^T    complete
 

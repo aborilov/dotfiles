@@ -42,7 +42,8 @@ Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
+Plugin 'w0rp/ale'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Valloric/YouCompleteMe'
@@ -58,14 +59,26 @@ Plugin 'edkolev/tmuxline.vim'
 Plugin 'sjl/gundo.vim'
 Plugin 'benmills/vimux'
 Plugin 'ryanoasis/vim-devicons'
-Plugin 'lyokha/vim-xkbswitch'
+" start to work too slow
+" Plugin 'lyokha/vim-xkbswitch'
 Plugin 'machakann/vim-sandwich'
 Plugin 'pearofducks/ansible-vim'
 Plugin 'fatih/vim-go'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'rizzatti/dash.vim'
+Plugin 'metakirby5/codi.vim'
 call vundle#end()            " required
+
+"Dash
+nmap <Leader>da <Plug>DashSearch
+
+"ALE
+let g:ale_sign_warning = '⚠'
+let g:ale_sign_error = '✗'
+let g:ale_linters = {'python': ['flake8', 'pylint']}
+let g:ale_python_pylint_executable = 'python'
 
 "vim-go
 au FileType go nmap <leader>r <Plug>(go-run)
@@ -74,6 +87,7 @@ au FileType go nmap <Leader>hd <Plug>(go-doc)
 au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>e <Plug>(go-rename)
+au FileType go nmap <Leader>gt <Plug>(go-test)
 let g:go_fmt_command = "goimports"
 
 "xkbswitch
@@ -100,10 +114,10 @@ nnoremap <leader>u :GundoToggle<CR>
 let g:airline_powerline_fonts = 1
 
 "syntastic
-let g:syntastic_python_checkers = ['pyflakes', 'pep8']
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:go_list_type = "quickfix"
+" let g:syntastic_python_checkers = ['pyflakes', 'pep8']
+" let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+" let g:go_list_type = "quickfix"
 
 " Ack 
 nnoremap <leader>a :Ack!<space>
@@ -120,14 +134,15 @@ let g:pymode_run = 0
 let g:pymode_rope = 0
 let g:pymode_rope_completion = 0
 let g:pymode_rope_complete_on_dot = 0
-let g:pymode_lint = 1
-let g:pymode_lint_checkers = ["pyflakes", "pep8", "pylint"]
-let g:pymode_lint_on_write = 0
+let g:pymode_lint = 0
+let g:pymode_lint_checkers = ["pylint"]
+let g:pymode_lint_on_write = 1
 let g:pymode_folding = 0
 let g:pymode_syntax = 1
 let g:pymode_syntax_all = 1
 let g:pymode_syntax_indent_errors = g:pymode_syntax_all
 let g:pymode_syntax_space_errors = g:pymode_syntax_all
+let g:pymode_lint_ignore="C0111"
 nnoremap <leader>lf :PymodeLintAuto<CR>
 nnoremap <leader>lc :PymodeLint<CR>
 
@@ -135,6 +150,7 @@ nnoremap <leader>lc :PymodeLint<CR>
 set completeopt-=preview
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:ycm_server_python_interpreter = '/usr/local/bin/python3'
 
 "NerdTree
 let g:NERDTreeQuitOnOpen=1
@@ -145,6 +161,7 @@ let g:CtrlSpaceSaveWorkspaceOnExit = 1
 let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
 let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
 au VimEnter * nested silent! exe "argdo e" | bn
+nnoremap <silent><C-p> :CtrlSpace O<CR>
 
 "TagList
 let g:Tlist_Close_On_Select = 1
@@ -155,7 +172,9 @@ set tags+=./tags;/
 
 "NerdCommenter
 let g:NERDSpaceDelims=1
-let NERDTreeIgnore = ['.vim$', '\~$', '.*\.pyc$', 'pip-log\.txt$', 'whoosh_index',
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 1
+let NERDTreeIgnore = ['__pycache__', '.vim$', '\~$', '.*\.pyc$', 'pip-log\.txt$', 'whoosh_index',
                     \ 'xapian_index', '.*.pid', 'monitor.py', '.*-fixtures-.*.json',
                     \ '.*\.o$', 'db.db', 'tags.bak', '.*\.pdf$', '.*\.mid$',
                     \ '.*\.midi$']
@@ -328,7 +347,7 @@ let loaded_matchparen = 0
 set showtabline=0
 set ruler
 set title
-set matchpairs+=<:>
+" set matchpairs+=<:>
 set laststatus=2
 set showmatch
 set matchtime=2

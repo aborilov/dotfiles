@@ -3319,3 +3319,9 @@ zrclocal
 # End:
 alias ssh="TERM=rxvt ssh"
 alias urxvt='urxvt -e screen'
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+export GOPATH=/Users/aborilov/work/go
+export LANG=en_US.UTF-8
+export PATH=$PATH:~/Library/Python/3.6/bin/
+export PATH=$PATH:~/Library/Python/2.7/bin/

@@ -1,6 +1,6 @@
 [general]
 ui = ttyui
-accounts = aborilov, cloudlinux
+accounts = aborilov
 pythonfile=~/.mutt/offlineimap.py
 /* pythonfile=~/.mutt/offlineimap.py */
 fsync = False
@@ -8,13 +8,13 @@ fsync = False
 [Account aborilov]
 localrepository = aborilov-Local
 remoterepository = aborilov-Remote
-status_backend = sqlite
+/* status_backend = sqlite */
 /* postsynchook = notmuch new */
 
 [Account cloudlinux]
 localrepository = cloudlinux-Local
 remoterepository = cloudlinux-Remote
-status_backend = sqlite
+/* status_backend = sqlite */
 /* postsynchook = notmuch new */
 
 [Repository aborilov-Local]

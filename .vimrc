@@ -65,10 +65,12 @@ Plugin 'machakann/vim-sandwich'
 Plugin 'pearofducks/ansible-vim'
 Plugin 'fatih/vim-go'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'rizzatti/dash.vim'
 Plugin 'metakirby5/codi.vim'
+Plugin 'kylef/apiblueprint.vim'
+Plugin 'nelstrom/vim-markdown-folding'
 call vundle#end()            " required
 
 "Dash

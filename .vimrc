@@ -50,7 +50,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'klen/python-mode'
 Plugin 'tomasr/molokai'
-Plugin 'vim-scripts/taglist.vim'
+" Plugin 'vim-scripts/taglist.vim'
 Plugin 'szw/vim-ctrlspace'
 Plugin 'mileszs/ack.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
@@ -62,13 +62,13 @@ Plugin 'ryanoasis/vim-devicons'
 " start to work too slow
 " Plugin 'lyokha/vim-xkbswitch'
 Plugin 'machakann/vim-sandwich'
-Plugin 'pearofducks/ansible-vim'
+" Plugin 'pearofducks/ansible-vim'
 Plugin 'fatih/vim-go'
 Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-unimpaired'
-Plugin 'rizzatti/dash.vim'
-Plugin 'metakirby5/codi.vim'
+" Plugin 'rizzatti/dash.vim'
+" Plugin 'metakirby5/codi.vim'
 Plugin 'kylef/apiblueprint.vim'
 Plugin 'nelstrom/vim-markdown-folding'
 call vundle#end()            " required
@@ -79,7 +79,7 @@ nmap <Leader>da <Plug>DashSearch
 "ALE
 let g:ale_sign_warning = '⚠'
 let g:ale_sign_error = '✗'
-let g:ale_linters = {'python': ['flake8', 'pylint']}
+let g:ale_linters = {'python': ['flake8', 'pylint'],'go': ['golint', 'go vet', 'goimports']}
 let g:ale_python_pylint_executable = 'python'
 
 "vim-go
@@ -140,7 +140,7 @@ let g:pymode_lint = 0
 let g:pymode_lint_checkers = ["pylint"]
 let g:pymode_lint_on_write = 1
 let g:pymode_folding = 0
-let g:pymode_syntax = 1
+let g:pymode_syntax = 0
 let g:pymode_syntax_all = 1
 let g:pymode_syntax_indent_errors = g:pymode_syntax_all
 let g:pymode_syntax_space_errors = g:pymode_syntax_all
@@ -152,7 +152,7 @@ nnoremap <leader>lc :PymodeLint<CR>
 set completeopt-=preview
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-let g:ycm_server_python_interpreter = 'python'
+let g:ycm_server_python_interpreter = '/usr/local/bin/python3'
 
 "NerdTree
 let g:NERDTreeQuitOnOpen=1
@@ -345,6 +345,7 @@ set smartcase                     " But case-sensitive if expression contains a 
 
 " ================ Others ========================
 
+set colorcolumn=79
 let loaded_matchparen = 0
 set showtabline=0
 set ruler
@@ -399,3 +400,5 @@ augroup nline
     au WinLeave * set nonumber | set norelativenumber
     au WinEnter * set number | set relativenumber
 augroup END
+au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
+au FileType yml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2

@@ -51,7 +51,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'klen/python-mode'
 Plugin 'tomasr/molokai'
 " Plugin 'vim-scripts/taglist.vim'
-Plugin 'szw/vim-ctrlspace'
+" Plugin 'szw/vim-ctrlspace'
 Plugin 'mileszs/ack.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -65,7 +65,7 @@ Plugin 'machakann/vim-sandwich'
 " Plugin 'pearofducks/ansible-vim'
 Plugin 'fatih/vim-go'
 Plugin 'vim-airline/vim-airline-themes'
-" Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-unimpaired'
 " Plugin 'rizzatti/dash.vim'
 " Plugin 'metakirby5/codi.vim'
@@ -82,6 +82,9 @@ let g:ale_sign_error = '✗'
 let g:ale_linters = {'python': ['flake8', 'pylint'],'go': ['golint', 'go vet', 'goimports']}
 let g:ale_python_pylint_executable = 'python'
 
+"ctrlp
+nnoremap <C-@> :CtrlPBuffer<CR>
+
 "vim-go
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
@@ -90,6 +93,8 @@ au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>e <Plug>(go-rename)
 au FileType go nmap <Leader>gt <Plug>(go-test)
+" au FileType go nmap <Leader>rr :GoDecls<CR>
+au FileType go nmap <Leader>dr :GoDeclsDir<CR>
 let g:go_fmt_command = "goimports"
 
 "xkbswitch
@@ -123,7 +128,7 @@ let g:airline_powerline_fonts = 1
 
 " Ack 
 nnoremap <leader>a :Ack!<space>
-let g:ackprg = 'ack --smart-case --nogroup --nocolor --column'
+let g:ackprg = 'ack --ignore-dir=vendor --smart-case --nogroup --nocolor --column'
 
 "vim-indent-guides
 let g:indent_guides_enable_on_vim_startup=1
@@ -157,13 +162,6 @@ let g:ycm_server_python_interpreter = '/usr/local/bin/python3'
 "NerdTree
 let g:NERDTreeQuitOnOpen=1
 map <C-k><C-b> :NERDTreeToggle<CR>
-
-"CtrlSpace
-let g:CtrlSpaceSaveWorkspaceOnExit = 1
-let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
-let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
-au VimEnter * nested silent! exe "argdo e" | bn
-nnoremap <silent><C-p> :CtrlSpace O<CR>
 
 "TagList
 let g:Tlist_Close_On_Select = 1

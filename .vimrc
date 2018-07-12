@@ -46,7 +46,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'w0rp/ale'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'klen/python-mode'
 Plugin 'tomasr/molokai'
@@ -71,6 +71,12 @@ Plugin 'tpope/vim-unimpaired'
 " Plugin 'metakirby5/codi.vim'
 Plugin 'kylef/apiblueprint.vim'
 Plugin 'nelstrom/vim-markdown-folding'
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'roxma/nvim-yarp'
+Plugin 'roxma/vim-hug-neovim-rpc'
+Plugin 'zchee/deoplete-go'
+Plugin 'Shougo/neosnippet.vim'
+Plugin 'Shougo/neosnippet-snippets'
 call vundle#end()            " required
 
 "Dash
@@ -81,9 +87,11 @@ let g:ale_sign_warning = '⚠'
 let g:ale_sign_error = '✗'
 let g:ale_linters = {'python': ['flake8', 'pylint'],'go': ['golint', 'go vet', 'goimports']}
 let g:ale_python_pylint_executable = 'python'
+let g:airline#extensions#ale#enabled = 1
 
 "ctrlp
 nnoremap <C-@> :CtrlPBuffer<CR>
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 "vim-go
 au FileType go nmap <leader>r <Plug>(go-run)
@@ -92,10 +100,28 @@ au FileType go nmap <Leader>hd <Plug>(go-doc)
 au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>e <Plug>(go-rename)
+au FileType go nnoremap <leader>g :GoDef<CR>
 au FileType go nmap <Leader>gt <Plug>(go-test)
+au FileType go nmap <Leader>gi <Plug>(go-install ./...)
 " au FileType go nmap <Leader>rr :GoDecls<CR>
 au FileType go nmap <Leader>dr :GoDeclsDir<CR>
+au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
+au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
+au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
 let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
+let g:go_snippet_engine = "neosnippet"
+
+let g:deoplete#sources#go#gocode_binary = '/Users/aborilov/work/go/bin/gocode'
+let g:deoplete#enable_at_startup = 1
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-j>     <Plug>(neosnippet_expand_or_jump)
+smap <C-j>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-j>     <Plug>(neosnippet_expand_target)
 
 "xkbswitch
 let g:XkbSwitchEnabled = 1
@@ -137,8 +163,8 @@ let g:indent_guides_start_level=2
 
 "pymode
 let g:pymode = 1
-let g:pymode_run = 0
-let g:pymode_rope = 0
+let g:pymode_run = 1
+let g:pymode_rope = 1
 let g:pymode_rope_completion = 0
 let g:pymode_rope_complete_on_dot = 0
 let g:pymode_lint = 0
@@ -155,9 +181,9 @@ nnoremap <leader>lc :PymodeLint<CR>
 
 "YouCompleteMe
 set completeopt-=preview
-nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-let g:ycm_server_python_interpreter = 'python'
+let g:ycm_server_python_interpreter = '/usr/local/bin/python3'
 
 "NerdTree
 let g:NERDTreeQuitOnOpen=1
@@ -290,15 +316,6 @@ nnoremap g; g;zz
 nnoremap g, g,zz
 nnoremap <c-o> <c-o>zz
 
-" Easy buffer navigation
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-
-nnoremap <C-left> 5<C-w><
-nnoremap <C-right> 5<C-w>>
-
 noremap <leader>v <C-w>v
 
 
@@ -400,3 +417,4 @@ augroup nline
 augroup END
 au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
 au FileType yml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
+

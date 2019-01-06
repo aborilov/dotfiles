@@ -42,6 +42,7 @@ Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 " Plugin 'scrooloose/syntastic'
 Plugin 'w0rp/ale'
 Plugin 'airblade/vim-gitgutter'
@@ -102,6 +103,7 @@ au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>e <Plug>(go-rename)
 au FileType go nnoremap <leader>g :GoDef<CR>
 au FileType go nmap <Leader>gt <Plug>(go-test)
+au FileType go nmap <Leader>ge :GoIfErr<CR>
 au FileType go nmap <Leader>gi <Plug>(go-install ./...)
 " au FileType go nmap <Leader>rr :GoDecls<CR>
 au FileType go nmap <Leader>dr :GoDeclsDir<CR>
@@ -113,6 +115,10 @@ let g:go_auto_type_info = 1
 let g:go_snippet_engine = "neosnippet"
 
 let g:deoplete#sources#go#gocode_binary = '/Users/aborilov/work/go/bin/gocode'
+set pyxversion=3
+set encoding=utf-8
+let g:python_host_prog = "/Users/aborilov/.virtualenvs/eng/bin/python2"
+let g:python3_host_prog = "/Users/aborilov/.virtualenvs/eng/bin/python3"
 let g:deoplete#enable_at_startup = 1
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"

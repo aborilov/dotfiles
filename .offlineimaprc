@@ -11,9 +11,9 @@ remoterepository = aborilov-Remote
 /* status_backend = sqlite */
 /* postsynchook = notmuch new */
 
-[Account cloudlinux]
-localrepository = cloudlinux-Local
-remoterepository = cloudlinux-Remote
+[Account moqod]
+localrepository = moqod-Local
+remoterepository = moqod-Remote
 /* status_backend = sqlite */
 /* postsynchook = notmuch new */
 
@@ -28,9 +28,9 @@ nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
                             'archive': '[Gmail]/All Mail',
                             }.get(folder, folder)
 
-[Repository cloudlinux-Local]
+[Repository moqod-Local]
 type = Maildir
-localfolders = ~/.mail/cloudlinux
+localfolders = ~/.mail/moqod
 nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
                             'sent':    '[Gmail]/Sent Mail',
                             'flagged': '[Gmail]/Starred',
@@ -39,11 +39,11 @@ nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
                             'archive': '[Gmail]/All Mail',
                             }.get(folder, folder)
 
-[Repository cloudlinux-Remote]
+[Repository moqod-Remote]
 maxconnections = 1
 type = Gmail
-remoteuser = paborilov@cloudlinux.com
-remotepasseval = get_keychain_pass(account="paborilov@cloudlinux.com", server="imap.cloudlinux.com")
+remoteuser = aborilov@moqod.com
+remotepasseval = get_keychain_pass(account="aborilov@moqod.com", server="imap.moqod.com")
 realdelete = no
 nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
                             '[Gmail]/Sent Mail': 'sent',
@@ -72,7 +72,9 @@ nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
                             }.get(folder, folder)
 folderfilter = lambda folder: folder not in ['[Gmail]/Important',
                                              ]
+ssl_version = tls1_2
 ssl=true
+starttls = no
 sslcacertfile = /usr/local/etc/openssl/cert.pem
 /* cert_fingerprint=f3043dd689a2e7dddfbef82703a6c65ea9b634c1 */
 

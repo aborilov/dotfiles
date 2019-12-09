@@ -1,0 +1,39 @@
+# ~/.mutt/mailcap
+#
+# this uses the view_attachment script found in ~/.mutt/view_attachment.sh
+#
+# this is meant for an OS X system
+
+# MS Excel
+# this will use the default xls spreadsheet handler from open
+application/x-msexcel; ~/.mutt/view_attachment.sh %s
+application/ms-exc; ~/.mutt/view_attachment.sh %s
+application/excel; ~/.mutt/view_attachment.sh %s
+application/msexcel; ~/.mutt/view_attachment.sh %s
+application/vnd.ms-exc; ~/.mutt/view_attachment.sh %s
+application/vnd.ms-excel; ~/.mutt/view_attachment.sh %s
+
+# MS Word
+# application/msword; ~/.mutt/view_attachment.sh %s "-" 'lowriter'
+# MS Word documents
+application/msword; ~/.mutt/view_attachment.sh %s "-" '/Applications/TextEdit.app'
+
+# Images
+image/jpg; ~/.mutt/view_attachment.sh %s jpg
+image/jpeg; ~/.mutt/view_attachment.sh %s jpg
+image/pjpeg; ~/.mutt/view_attachment.sh %s jpg
+image/png; ~/.mutt/view_attachment.sh %s png
+image/gif; ~/.mutt/view_attachment.sh %s gif
+text/xml; vim %s
+text/plain; vim %s
+
+# PDF
+application/pdf; ~/.mutt/view_attachment.sh %s pdf
+
+# HTML
+text/html; ~/.mutt/view_attachment.sh %s html
+
+# Unidentified.
+application/octet-stream; ~/.mutt/view_attachment.sh %s "-" 
+
+# text/html; lynx -assume_charset=%{charset} -display_charset=utf-8 -dump %s; nametemplate=%s.html; copiousoutput

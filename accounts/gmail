@@ -1,0 +1,18 @@
+# vim: ft=muttrc
+set from = "aborilov@gmail.com"
+set sendmail = "/usr/local/bin/msmtp -a aborilov"
+# Other special folders.
+set mbox      = "+aborilov.com/archive"
+set postponed = "+aborilov.com/drafts"
+set signature         = ~/.mutt/accounts/gmail_sig
+# Sync email
+macro index O "<shell-escape>offlineimap -a aborilov<enter>"           "run offlineimap to sync all mail"
+macro index o "<shell-escape>offlineimap -a aborilov -qf INBOX<enter>" "run offlineimap to sync inbox"
+macro index,pager \Cd "<save-message>+aborilov.com/trash<enter><refresh>" "Trash Message"
+macro index ,c "<change-folder>+moqod/INBOX<enter>" "change accounts"
+
+macro index gi "<change-folder>+aborilov.com/INBOX<enter>" "Go to all mail"
+macro index ga "<change-folder>+aborilov.com/archive<enter>" "Go to all mail"
+macro index gs "<change-folder>+aborilov.com/sent<enter>" " Go to sent mail"
+macro index gd "<change-folder>+aborilov.com/drafts<enter>" "Go to drafts"
+

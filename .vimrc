@@ -76,8 +76,9 @@ Plugin 'Shougo/deoplete.nvim'
 Plugin 'roxma/nvim-yarp'
 Plugin 'roxma/vim-hug-neovim-rpc'
 Plugin 'zchee/deoplete-go'
-Plugin 'Shougo/neosnippet.vim'
-Plugin 'Shougo/neosnippet-snippets'
+" Plugin 'Shougo/neosnippet.vim'
+" Plugin 'Shougo/neosnippet-snippets'
+" Plugin 'ervandew/supertab'
 call vundle#end()            " required
 
 "Dash
@@ -93,6 +94,8 @@ let g:airline#extensions#ale#enabled = 1
 "ctrlp
 nnoremap <C-@> :CtrlPBuffer<CR>
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+" let g:go_debug_address = 'dev.aborilov.ru:2345'
 
 "vim-go
 au FileType go nmap <leader>r <Plug>(go-run)
@@ -113,12 +116,15 @@ au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
 let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
 let g:go_snippet_engine = "neosnippet"
+let g:go_doc_popup_window = 1
 
 let g:deoplete#sources#go#gocode_binary = '/Users/aborilov/work/go/bin/gocode'
 set pyxversion=3
 set encoding=utf-8
-let g:python_host_prog = "/Users/aborilov/.virtualenvs/eng/bin/python2"
-let g:python3_host_prog = "/Users/aborilov/.virtualenvs/eng/bin/python3"
+" let g:python_host_prog = "python"
+" let g:python3_host_prog = "python3"
+" let g:python_host_prog = "/Users/aborilov/.virtualenvs/eng/bin/python"
+" let g:python3_host_prog = "/Users/aborilov/.virtualenvs/eng/bin/python3"
 let g:deoplete#enable_at_startup = 1
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
@@ -187,9 +193,10 @@ nnoremap <leader>lc :PymodeLint<CR>
 
 "YouCompleteMe
 set completeopt-=preview
+" set omnifunc=syntaxcomplete#Complete
 " nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-let g:ycm_server_python_interpreter = '/usr/local/bin/python3'
+" let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+" let g:ycm_server_python_interpreter = '/usr/local/bin/python3'
 
 "NerdTree
 let g:NERDTreeQuitOnOpen=1
@@ -366,7 +373,7 @@ set smartcase                     " But case-sensitive if expression contains a 
 
 " ================ Others ========================
 
-set colorcolumn=79
+" set colorcolumn=79
 let loaded_matchparen = 0
 set showtabline=0
 set ruler
@@ -424,3 +431,9 @@ augroup END
 au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
 au FileType yml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
 
+
+" autocmd FileType * 
+      " \if &omnifunc != '' |
+      " \call SuperTabChain(&omnifunc, "<c-p>") |
+      " \call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+      " \endif

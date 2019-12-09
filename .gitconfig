@@ -1,10 +1,11 @@
 [user]
 	name = Aborilov Pavel
 	email = aborilov@gmail.com
+	signingkey = 0A43C5E87075BA0B
 [core]
 	excludesfile = ~/.gitignore
 [merge]
-    tool = meld
+	tool = meld
 #[diff]
 #	external = git-meld
 [alias]
@@ -12,4 +13,14 @@
     ci = commit
     st = status
     br = branch
-    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    hist = log --graph --full-history --all --color --pretty=format:\"%x1b[31m%h %Cgreen%ad | [%an]%x09%x1b[32m%d%x1b[0m%x20%s\" --date=short
+    bh = log --graph --full-history --color --pretty=format:\"%x1b[31m%h %Cgreen%ad | [%an]%x09%x1b[32m%d%x1b[0m%x20%s\" --date=short
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[http]
+	cookiefile = /Users/aborilov/.gitcookies
+[commit]
+	gpgsign = true

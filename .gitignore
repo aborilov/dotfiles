@@ -1,2 +1,5 @@
 # SublimeText project files
 *.sublime-workspace
+.deploy.sh
+*.pyc
+*.sqlite*

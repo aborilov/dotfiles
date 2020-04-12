@@ -14,6 +14,12 @@ set showmode                    "Show current mode down the bottom
 set novisualbell                  "No sounds
 set autoread                    "Reload files changed outside vim
 
+" Try to make vim syntax highlight faster
+" See: https://github.com/fatih/vim-go/issues/145
+set nocursorcolumn
+syntax sync minlines=256
+set re=1
+
 
 " This makes vim act like all other editors, buffers can
 " exist in the background without being in a window.
@@ -43,42 +49,25 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb'
-" Plugin 'scrooloose/syntastic'
 Plugin 'w0rp/ale'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
-" Plugin 'Valloric/YouCompleteMe'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'klen/python-mode'
 Plugin 'tomasr/molokai'
-" Plugin 'vim-scripts/taglist.vim'
-" Plugin 'szw/vim-ctrlspace'
 Plugin 'mileszs/ack.vim'
-Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'sjl/gundo.vim'
 Plugin 'benmills/vimux'
 Plugin 'ryanoasis/vim-devicons'
-" start to work too slow
-" Plugin 'lyokha/vim-xkbswitch'
 Plugin 'machakann/vim-sandwich'
-" Plugin 'pearofducks/ansible-vim'
 Plugin 'fatih/vim-go'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-unimpaired'
-" Plugin 'rizzatti/dash.vim'
-" Plugin 'metakirby5/codi.vim'
 Plugin 'kylef/apiblueprint.vim'
 Plugin 'nelstrom/vim-markdown-folding'
-Plugin 'Shougo/deoplete.nvim'
-Plugin 'roxma/nvim-yarp'
-Plugin 'roxma/vim-hug-neovim-rpc'
-Plugin 'zchee/deoplete-go'
-" Plugin 'Shougo/neosnippet.vim'
-" Plugin 'Shougo/neosnippet-snippets'
-" Plugin 'ervandew/supertab'
 call vundle#end()            " required
 
 "Dash
@@ -105,7 +94,7 @@ au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>e <Plug>(go-rename)
 au FileType go nnoremap <leader>g :GoDef<CR>
-au FileType go nmap <Leader>gt <Plug>(go-test)
+au FileType go nmap <Leader>gt <Plug>(go-test-func)
 au FileType go nmap <Leader>ge :GoIfErr<CR>
 au FileType go nmap <Leader>gi <Plug>(go-install ./...)
 " au FileType go nmap <Leader>rr :GoDecls<CR>
@@ -115,25 +104,12 @@ au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
 au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
 let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
-let g:go_snippet_engine = "neosnippet"
 let g:go_doc_popup_window = 1
+let g:go_rename_command = 'gopls'
 
-let g:deoplete#sources#go#gocode_binary = '/Users/aborilov/work/go/bin/gocode'
 set pyxversion=3
 set encoding=utf-8
-" let g:python_host_prog = "python"
-" let g:python3_host_prog = "python3"
-" let g:python_host_prog = "/Users/aborilov/.virtualenvs/eng/bin/python"
-" let g:python3_host_prog = "/Users/aborilov/.virtualenvs/eng/bin/python3"
-let g:deoplete#enable_at_startup = 1
-" deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-" Plugin key-mappings.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-j>     <Plug>(neosnippet_expand_or_jump)
-smap <C-j>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-j>     <Plug>(neosnippet_expand_target)
 
 "xkbswitch
 let g:XkbSwitchEnabled = 1
@@ -193,6 +169,7 @@ nnoremap <leader>lc :PymodeLint<CR>
 
 "YouCompleteMe
 set completeopt-=preview
+" set completeopt+=preview
 " set omnifunc=syntaxcomplete#Complete
 " nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
@@ -393,7 +370,7 @@ set guioptions-=L  "remove left-hand scroll bar
 
 " set t_Co=256
 " let g:solarized_termcolors=256
-set background=dark
+set background=light
 try
     colorscheme solarized
 catch

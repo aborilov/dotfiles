@@ -3,6 +3,7 @@
 set nocompatible
 
 " ================ General Config ====================
+set mmp=5000
 
 " set nonumber                      "Line numbers are good
 set relativenumber
@@ -58,7 +59,6 @@ Plugin 'tomasr/molokai'
 Plugin 'mileszs/ack.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'edkolev/tmuxline.vim'
-Plugin 'sjl/gundo.vim'
 Plugin 'benmills/vimux'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'machakann/vim-sandwich'
@@ -90,6 +90,7 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <Leader>hd <Plug>(go-doc)
+au FileType go nmap <Leader>re <Plug>(go-referrers)
 au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>e <Plug>(go-rename)
@@ -128,9 +129,6 @@ nmap <Leader>vs ggVG"vy :call VimuxSlime()<CR>
 " Run last command executed by VimuxRunCommand
 map <Leader>vl :VimuxRunLastCommand<CR>
 
-"gundo
-nnoremap <leader>u :GundoToggle<CR>
-
 "airline
 let g:airline_powerline_fonts = 1
 
@@ -150,7 +148,7 @@ let g:indent_guides_guide_size=1
 let g:indent_guides_start_level=2
 
 "pymode
-let g:pymode = 1
+let g:pymode = 0
 let g:pymode_run = 1
 let g:pymode_rope = 1
 let g:pymode_rope_completion = 0
@@ -362,7 +360,7 @@ set matchtime=2
 set esckeys
 set magic
 set cursorline
-set guifont=Inconsolata\ LGC\ for\ Powerline\ Plus\ Nerd\ File\ Types\ Mono:h13
+set guifont=Inconsolata\ LGC\ for\ Powerline\ Plus\ Nerd\ File\ Types\ Mono:h14
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
@@ -370,7 +368,7 @@ set guioptions-=L  "remove left-hand scroll bar
 
 " set t_Co=256
 " let g:solarized_termcolors=256
-set background=light
+set background=dark
 try
     colorscheme solarized
 catch

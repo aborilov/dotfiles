@@ -33,6 +33,7 @@ local function init()
   use 'wbthomason/packer.nvim' 
 
   use 'lewis6991/impatient.nvim'
+  use 'fatih/vim-go'
 
   use 'nvim-tree/nvim-tree.lua'
   use "nvim-lua/plenary.nvim"
@@ -58,9 +59,13 @@ local function init()
   requires = { {'nvim-lua/plenary.nvim'} }
 }
 
-  use 'ishan9299/nvim-solarized-lua'
+  -- use 'ishan9299/nvim-solarized-lua'
+  use 'tjdevries/colorbuddy.nvim'
+  use 'svrana/neosolarized.nvim'
+
 
   -- Commenting
+  -- use 'tomtom/tcomment_vim'
   use 'numToStr/Comment.nvim'
 
   -- Wrapping/delimiters

@@ -38,6 +38,7 @@ colors:
     cyan:    '#93a1a1' # base1
     white:   '#fdf6e3' # base3
 font:
-  normal: 
+  normal:
     family: Inconsolata LGC for Powerline Plus Nerd File Types Mono
+
   size: 14

@@ -18,6 +18,10 @@ create_cmd('PackerSync', function()
   cmd [[packadd packer.nvim]]
   require('plugins').sync()
 end, {})
+create_cmd('PackerStatus', function()
+  cmd [[packadd packer.nvim]]
+  require('plugins').status()
+end, {})
 create_cmd('PackerClean', function()
   cmd [[packadd packer.nvim]]
   require('plugins').clean()
@@ -28,8 +32,18 @@ create_cmd('PackerCompile', function()
 end, {})
 
 require 'impatient'
-require("nvim-tree").setup()
-require 'lspconfig'.gopls.setup{}
+require("nvim-tree").setup{
+    actions = {
+	    open_file = {resize_window = false},
+    },
+}
+require 'lspconfig'.gopls.setup{
+    cmd = {"/Users/aborilov/go/bin/gopls", "serve"},
+}
+require('neosolarized').setup({
+    comment_italics = true,
+    background_set = false,
+})
 require('Comment').setup({
     toggler = {
         ---Line-comment toggle keymap
@@ -89,9 +103,9 @@ require('telescope').setup{
     buffers = {
       theme = "ivy",
     },
-    lsp_references = {
-      theme = "cursor",
-    },
+    -- lsp_references = {
+    --   theme = "cursor",
+    -- },
     lsp_implementations = {
       theme = "cursor",
     }
@@ -152,6 +166,16 @@ vim.api.nvim_set_keymap('n', '<leader>v', '<C-w>v', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-k><C-b>', ':NvimTreeToggle<CR>', { noremap = false })
 vim.api.nvim_set_keymap('n', '<leader>st', ':Git<CR>', { noremap = true })
 
+-- vim.api.nvim_set_keymap('n', '<leader>b', ':GoBuild<CR>', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<leader>r', ':GoRun<CR>', { noremap = true })
+
+cmd([[
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>ge :GoIfErr<CR>
+let g:go_auto_type_info = 1
+]])
+
 
 cmd([[
 au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
@@ -202,5 +226,7 @@ opt.linebreak = true
 opt.completeopt = 'menu' 
 opt.listchars='tab:▸ ,eol:¬,extends:❯,precedes:❮'
 
-cmd([[colorscheme solarized ]])
-cmd([[hi Normal guibg=None ]])
+-- cmd([[colorscheme solarized ]])
+-- cmd([[hi Normal guibg=None ]])
+-- cmd([[hi CursorLine guibg=None ]])
+-- cmd([[hi LineNr guibg=None ]])

@@ -55,7 +55,10 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew docker virtualenvwrapper buffalo)
+# virtualenvwrapper and buffalo removed: the buffalo plugin does not exist in
+# oh-my-zsh at all, and virtualenvwrapper.sh is not installed - both printed a
+# warning on every shell startup.
+plugins=(git brew docker)
 
 source $ZSH/oh-my-zsh.sh
 

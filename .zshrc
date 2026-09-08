@@ -87,7 +87,7 @@ export LANG=en_US.UTF-8
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim=/usr/local/bin/vim
+# alias vim=/usr/local/bin/vim   # dead Intel-Homebrew path; /opt/homebrew/bin/vim is already first on PATH
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 

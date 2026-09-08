@@ -37,7 +37,11 @@ local function init()
 
   use 'nvim-tree/nvim-tree.lua'
   use "nvim-lua/plenary.nvim"
-  use "jose-elias-alvarez/null-ls.nvim"
+  -- none-ls is the maintained fork of the archived jose-elias-alvarez/null-ls.
+  -- It keeps the `null-ls` module name, so init.lua's require("null-ls") works.
+  -- This is what is actually installed; declaring the old repo made PackerSync
+  -- want to delete none-ls and install the dead one.
+  use "nvimtools/none-ls.nvim"
   use "tpope/vim-fugitive"
 
   use { 'alexghergh/nvim-tmux-navigation', config = function()

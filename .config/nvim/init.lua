@@ -37,13 +37,21 @@ require("nvim-tree").setup{
 	    open_file = {resize_window = false},
     },
 }
-require 'lspconfig'.gopls.setup{
-    cmd = {"/Users/aborilov/go/bin/gopls", "serve"},
-}
+-- nvim 0.11+ native LSP API. The old `require('lspconfig').gopls.setup{}`
+-- framework is deprecated and prints a traceback on every startup.
+-- nvim-lspconfig still supplies the gopls defaults via its lsp/gopls.lua.
+vim.lsp.config('gopls', {
+    cmd = { "/Users/aborilov/go/bin/gopls", "serve" },
+})
+vim.lsp.enable('gopls')
 require('neosolarized').setup({
     comment_italics = true,
     background_set = false,
 })
+-- Required since neosolarized.nvim's 2025 rewrite: setup() only configures the
+-- palette now, it no longer applies the scheme. Without this nvim falls back to
+-- its built-in default (dark grey #14161b) instead of solarized.
+vim.cmd.colorscheme('neosolarized')
 require('Comment').setup({
     toggler = {
         ---Line-comment toggle keymap
@@ -81,7 +89,7 @@ null_ls.setup({
             })
         end
     end,
-    debug = true,
+    debug = false,  -- true here grew ~/.local/state/nvim/lsp.log to 1.8 GB
     sources = {
         null_ls.builtins.formatting.goimports,
         null_ls.builtins.diagnostics.golangci_lint,

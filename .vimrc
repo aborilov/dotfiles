@@ -38,37 +38,42 @@ let mapleader="\<Space>"
 " This loads all the plugins
 " Use Vundle plugin to manage all other plugins
 
-filetype off
+" Only load Vundle and its plugins if Vundle is actually installed.
+" Without this, a machine with no ~/.vim/bundle/Vundle.vim throws E117 on
+" vundle#begin() and then E492 for every Plugin/Bundle line.
+if isdirectory(expand('~/.vim/bundle/Vundle.vim'))
+  filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
+  set rtp+=~/.vim/bundle/Vundle.vim
+  call vundle#begin()
+  Plugin 'gmarik/Vundle.vim'
 
-Bundle 'Raimondi/delimitMate'
-Plugin 'bling/vim-airline'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rhubarb'
-Plugin 'w0rp/ale'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'klen/python-mode'
-Plugin 'tomasr/molokai'
-Plugin 'mileszs/ack.vim'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'benmills/vimux'
-Plugin 'ryanoasis/vim-devicons'
-Plugin 'machakann/vim-sandwich'
-Plugin 'fatih/vim-go'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'kylef/apiblueprint.vim'
-Plugin 'nelstrom/vim-markdown-folding'
-call vundle#end()            " required
+  Bundle 'Raimondi/delimitMate'
+  Plugin 'bling/vim-airline'
+  Plugin 'scrooloose/nerdtree'
+  Plugin 'tpope/vim-surround'
+  Plugin 'tpope/vim-fugitive'
+  Plugin 'tpope/vim-rhubarb'
+  Plugin 'w0rp/ale'
+  Plugin 'airblade/vim-gitgutter'
+  Plugin 'scrooloose/nerdcommenter'
+  Plugin 'altercation/vim-colors-solarized'
+  Plugin 'klen/python-mode'
+  Plugin 'tomasr/molokai'
+  Plugin 'mileszs/ack.vim'
+  Plugin 'christoomey/vim-tmux-navigator'
+  Plugin 'edkolev/tmuxline.vim'
+  Plugin 'benmills/vimux'
+  Plugin 'ryanoasis/vim-devicons'
+  Plugin 'machakann/vim-sandwich'
+  Plugin 'fatih/vim-go'
+  Plugin 'vim-airline/vim-airline-themes'
+  Plugin 'ctrlpvim/ctrlp.vim'
+  Plugin 'tpope/vim-unimpaired'
+  Plugin 'kylef/apiblueprint.vim'
+  Plugin 'nelstrom/vim-markdown-folding'
+  call vundle#end()            " required
+endif
 
 "Dash
 nmap <Leader>da <Plug>DashSearch

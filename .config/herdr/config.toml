@@ -1,0 +1,48 @@
+onboarding = false
+
+[keys]
+prefix           = "ctrl+a"
+split_horizontal = "prefix+s"       # stacked, like tmux 's'
+split_vertical   = "prefix+v"       # side by side
+settings         = "prefix+comma"   # moved off 's'
+
+[terminal]
+shell_mode = "auto"
+new_cwd    = "follow"
+
+[session]
+resume_agents_on_restore = true
+
+[worktrees]
+directory = "~/Projects/worktrees"
+
+[ui]
+agent_panel_sort = "priority"
+show_agent_labels_on_pane_borders = true
+confirm_close = true
+
+[ui.toast]
+delivery      = "terminal"
+delay_seconds = 2
+
+[ui.sidebar.spaces]
+rows = [
+  ["state_icon", "workspace"],
+  ["branch", "git_status"],
+]
+
+[ui.sidebar.agents]
+rows = [
+  ["state_icon", "workspace", "tab"],
+  ["agent", "state_text"],
+]
+
+[advanced]
+scrollback_limit_bytes = 50000000
+
+[update]
+channel = "stable"
+
+[theme]
+name = "solarized"
+auto_switch = false

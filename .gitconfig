@@ -1,7 +1,7 @@
 [user]
 	name = Aborilov Pavel
 	email = aborilov@gmail.com
-	signingkey = 0A43C5E87075BA0B
+	signingkey = 70CF28EB88BDB071
 [core]
 	excludesfile = ~/.gitignore
 [merge]
@@ -20,7 +20,11 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[http]
-	cookiefile = /Users/aborilov/.gitcookies
 [commit]
 	gpgsign = true
+[credential "https://github.com"]
+	helper = 
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !gh auth git-credential

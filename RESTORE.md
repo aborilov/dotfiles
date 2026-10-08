@@ -171,6 +171,12 @@ Everything else goes in: all secret keys and subkeys, `pubring.kbx`,
 `--exclude='.ssh/agent'` makes `tar` emit `pax format cannot archive sockets`
 errors.
 
+Write the archive outside the sync folder and move it in afterwards. Writing
+it directly into a Synology Drive folder lets the sync client read the file
+while `gpg` is still streaming into it, which logs `Failed to read file …
+Operation timed out` and forces a retry. It recovers on its own, but the failed
+first attempt in the log is alarming and easy to misread as a lost backup.
+
 Always confirm it opens before relying on it:
 
 ```sh

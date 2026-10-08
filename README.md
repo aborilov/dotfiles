@@ -2,45 +2,36 @@
 
 Personal configuration for macOS. Public repo — **no secrets, keys, or tokens belong here.**
 
-## Restore on a new Mac
+## Setting up a new Mac
+
+See **[RESTORE.md](RESTORE.md)** for the full procedure, in order.
+
+The short version:
 
 ```sh
-# 1. Xcode CLI tools + Homebrew
 xcode-select --install
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# install 1Password and sign in with the Emergency Kit first
 
-# 2. This repo
 git clone https://github.com/aborilov/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-
-# 3. All CLI tools and apps
 brew bundle install --file=Brewfile
-
-# 4. oh-my-zsh (must exist before .zshrc is copied, or the shell errors on startup)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-
-# 5. Copy the configs into ~
-./bootstrap.sh          # prompts; use -f to skip the prompt
+./bootstrap.sh
 ```
 
-### Then, manually
+Then restore GPG and SSH keys from the encrypted archive, install the vim /
+nvim / tmux plugin managers, and log back into the CLI tools — all covered in
+[RESTORE.md](RESTORE.md).
 
-- **Vim plugins** — `.vimrc` uses Vundle:
-  `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim && vim +PluginInstall +qall`
-- **Neovim plugins** — `.config/nvim` uses packer; open `nvim` and run `:PackerSync`.
-- **tmux plugins** — `.tmux.conf` uses tpm:
-  `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`, then `prefix + I` inside tmux.
-- **Fonts** — the `.fonts/` TTFs land in `~/.fonts`; on macOS also copy them to `~/Library/Fonts` so apps see them.
-- **GPG signing** — `.gitconfig` sets `commit.gpgsign = true` with key `0A43C5E87075BA0B`. Import that secret key from your backup or commits will fail. (`gpg --import`, then `gpg --list-secret-keys`.)
-- **SSH** — `~/.ssh/config` and keys are deliberately *not* in this repo. `.gitconfig` rewrites
-  `https://github.com/ardanlabs/` to `git@github-ardan.com:`, which needs a matching `Host github-ardan.com`
-  entry in your `~/.ssh/config`.
+`bootstrap.sh` rsyncs the live configs into `~`. It excludes `legacy/`,
+`Brewfile`, the two markdown files and `.git/`.
 
 ## What's in here
 
 | Path | What |
 |---|---|
-| `Brewfile` | Homebrew formulae, casks, taps, Go tools, npm globals |
+| `Brewfile` | Homebrew taps, formulae, casks, Go tools, npm globals |
 | `.zshrc`, `.zshenv` | zsh + oh-my-zsh (agnoster theme, kube-ps1 prompt) |
 | `.vimrc` | vim (Vundle) |
 | `.config/nvim/` | neovim (packer) |
@@ -52,12 +43,10 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 | `.config/helm/repositories.yaml` | helm chart repos |
 | `.config/herdr/config.toml` | herdr keybindings |
 | `.fonts/` | Inconsolata LGC Nerd Font (powerline) |
-| `legacy/` | Old Linux desktop + mutt/offlineimap/mcabber mail setup. Kept for reference only; `bootstrap.sh` does **not** copy it. |
+| `legacy/` | Old Linux desktop + mutt/offlineimap/mcabber mail setup. Reference only; `bootstrap.sh` does **not** copy it. |
 
-## Deliberately excluded
+## Not in here
 
-Credentials and machine state — restore these from your password manager or backups, never from git:
-
-`~/.ssh/` · `~/.aws/` · `~/.kube/config` · `~/.netrc` · `~/.gnupg/` · `~/.config/gh/hosts.yml` ·
-`~/.config/gcloud/` · `~/.claude.json` and the `~/.claude*/` profile dirs · `~/.sentryclirc` ·
-shell/psql/redis history files
+Private keys, OAuth tokens, and `~/.ssh` / `~/.gnupg` are kept out of this repo
+by design. [RESTORE.md](RESTORE.md) lists where each one actually comes from and
+which are simply re-minted by a `login` command.

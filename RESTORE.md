@@ -150,13 +150,26 @@ The pipe matters — the plaintext tarball never touches disk.
 
 ```sh
 cd ~ && tar --exclude='S.*' --exclude='.#lk*' --exclude='random_seed' \
-    --exclude='pubring.kbx~' --exclude='known_hosts.old' \
+    --exclude='pubring.kbx~' --exclude='known_hosts.old' --exclude='.ssh/agent' \
     -czf - .gnupg .ssh \
   | gpg --symmetric --cipher-algo AES256 -o /path/to/keys.tar.gz.gpg
 ```
 
-The excludes drop live agent sockets, stale lock files, the RNG seed and
-keyring/known_hosts backups — none of which should travel between machines.
+This is both directories in full. The excludes only drop things that cannot or
+should not travel between machines:
+
+| Excluded | Why |
+|---|---|
+| `S.*`, `.ssh/agent` | unix sockets — `tar` cannot archive them at all, and `gpg-agent`/`ssh-agent` recreate them on launch |
+| `.#lk*` | stale lock files (37 of them, from retired machines) |
+| `random_seed` | RNG state; copying it to another machine is discouraged |
+| `pubring.kbx~`, `known_hosts.old` | backup copies of files that *are* included |
+
+Everything else goes in: all secret keys and subkeys, `pubring.kbx`,
+`trustdb.gpg`, the revocation certificate, `gpg.conf`, `gpg-agent.conf`,
+`dirmngr.conf`, and the whole of `~/.ssh` bar the socket directory. Omitting
+`--exclude='.ssh/agent'` makes `tar` emit `pax format cannot archive sockets`
+errors.
 
 Always confirm it opens before relying on it:
 

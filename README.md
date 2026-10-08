@@ -1,14 +1,17 @@
-aborilov dotfiles
-=================
+aborilov dotfiles — Linux server (`linux` branch)
+==============================================
 
 zsh (oh-my-zsh), vim, tmux, git, nvim, alacritty, herdr, k9s and Claude Code settings.
+
+This branch is the Linux dev server setup. The Mac setup lives on `master`;
+the two branches are kept separate on purpose.
 
 ## New machine
 
 Prerequisites: `git zsh vim tmux curl` (and `gh`, `herdr`, `claude` if you use them).
 
 ```sh
-git clone https://github.com/aborilov/dotfiles.git ~/dotfiles
+git clone -b linux https://github.com/aborilov/dotfiles.git ~/dotfiles
 ~/dotfiles/bootstrap.sh
 ```
 

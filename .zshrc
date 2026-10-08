@@ -101,3 +101,8 @@ if [ -f '/Users/aborilov/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Us
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/aborilov/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/aborilov/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 export PATH="/usr/local/opt/helm@2/bin:$PATH"
+
+# kube-ps1: show current Kubernetes context/namespace in the prompt.
+# Must come after `source $ZSH/oh-my-zsh.sh` so it prefixes the theme's prompt.
+source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
+PS1='$(kube_ps1)'$PS1

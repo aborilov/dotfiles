@@ -24,3 +24,7 @@
 	cookiefile = /Users/aborilov/.gitcookies
 [commit]
 	gpgsign = true
+[url "git@github-ardan.com:ardanlabs/"]
+	insteadOf = https://github.com/ardanlabs/
+[url "git@github.com:"]
+	insteadOf = https://github.com/

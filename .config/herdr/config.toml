@@ -1,0 +1,6 @@
+onboarding = false
+[keys]
+prefix           = "ctrl+a"
+split_horizontal = "prefix+s"
+split_vertical   = "prefix+v"
+settings         = "prefix+comma"

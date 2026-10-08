@@ -3,3 +3,7 @@
 .deploy.sh
 *.pyc
 *.sqlite*
+
+**/.claude/settings.local.json
+.DS_Store
+*.bak*

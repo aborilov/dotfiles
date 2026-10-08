@@ -8,7 +8,7 @@ the two branches are kept separate on purpose.
 
 ## New machine
 
-Prerequisites: `git zsh vim tmux curl` (and `gh`, `herdr`, `claude` if you use them).
+Prerequisites: `git zsh tmux curl` (and `gh`, `herdr`, `claude` if you use them).
 
 ```sh
 git clone -b linux https://github.com/aborilov/dotfiles.git ~/dotfiles
@@ -18,7 +18,8 @@ git clone -b linux https://github.com/aborilov/dotfiles.git ~/dotfiles
 `bootstrap.sh` is idempotent. It symlinks the configs into `$HOME` (anything in
 the way goes to `~/.dotfiles-backup/<timestamp>/`), copies Claude Code
 settings/hooks if missing (`--force` replaces them), and installs oh-my-zsh,
-tpm + tmux plugins, and Vundle + vim plugins.
+tpm + tmux plugins, Neovim 0.11+ (into `~/.local` if missing or older) and
+packer + nvim plugins.
 
 Then, by hand:
 

@@ -83,11 +83,29 @@ if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
 	git clone --depth 1 https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 fi
 "$HOME/.tmux/plugins/tpm/bin/install_plugins" >/dev/null || true
-if [[ ! -d "$HOME/.vim/bundle/Vundle.vim" ]]; then
-	git clone --depth 1 https://github.com/VundleVim/Vundle.vim "$HOME/.vim/bundle/Vundle.vim"
+
+echo "==> Neovim + packer"
+# The nvim config needs 0.11+ (vim.lsp.config); distro packages are older.
+# Install the official release into ~/.local (on PATH via .zshenv), no sudo.
+export PATH="$HOME/.local/bin:$PATH"
+if ! nvim --clean --headless -c 'if !has("nvim-0.11") | cquit | endif' -c qa >/dev/null 2>&1; then
+	arch="$(uname -m)"; [[ $arch == aarch64 ]] && arch=arm64
+	mkdir -p "$HOME/.local/opt" "$HOME/.local/bin"
+	rm -rf "$HOME/.local/opt/nvim-linux-$arch"
+	curl -fsSL "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-$arch.tar.gz" |
+		tar -xz -C "$HOME/.local/opt"
+	ln -sf "$HOME/.local/opt/nvim-linux-$arch/bin/nvim" "$HOME/.local/bin/nvim"
+	echo "  installed $(nvim --version | head -1) to ~/.local"
 fi
-mkdir -p "$HOME/.vim/backups"
-vim -E -s -u "$HOME/.vimrc" +PluginInstall +qall </dev/null || true
+# init.lua loads packer with `packadd`, so it starts in opt/ (PackerSync then
+# moves it to start/). First install only: afterwards update plugins from
+# inside nvim with :PackerSync.
+PACK="$HOME/.local/share/nvim/site/pack/packer"
+if [[ ! -d "$PACK/opt/packer.nvim" && ! -d "$PACK/start/packer.nvim" ]]; then
+	git clone -q --depth 1 https://github.com/wbthomason/packer.nvim "$PACK/opt/packer.nvim"
+	timeout 600 nvim --headless -c 'autocmd User PackerComplete quitall' -c PackerSync >/dev/null 2>&1 || true
+	echo "  installed $(ls "$PACK/start" 2>/dev/null | wc -l) packer plugins"
+fi
 
 if ls "$DOTFILES"/.fonts/*.ttf >/dev/null 2>&1; then
 	echo "==> Fonts"

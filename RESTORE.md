@@ -226,6 +226,17 @@ Each of these re-mints its own credentials; none are backed up.
 | Claude Code | `claude` then follow the prompt |
 | kubeconfig | re-fetch per cluster from the provider |
 
+## Verifying the restore
+
+`./check.sh` audits everything this document sets up — oh-my-zsh, the Ghostty
+config, fonts, all three GPG keys, keyboxd, SSH auth to GitHub, whether the
+uncommitted-work archive was extracted, each CLI tool, and the logins. Run it
+when you think you are finished; anything marked `--` is still outstanding.
+
+```sh
+cd ~/dotfiles && ./check.sh
+```
+
 ## Deliberately not backed up
 
 Anything recoverable is left out, to keep the irreplaceable part small enough

@@ -96,6 +96,17 @@ nothing else. If you prefer the installer, pass `--keep-zshrc`.
 `.zshrc` now guards both of its `source` lines, so landing it before oh-my-zsh
 or `kube-ps1` exists prints a hint instead of an error on every shell.
 
+**After this step, `git pull` in this repo needs your SSH key.** `.gitconfig`
+carries `url."git@github.com:".insteadOf = https://github.com/`, so every
+GitHub HTTPS URL is rewritten to SSH — including the HTTPS remote this repo was
+cloned with. Until step 5 restores `~/.ssh`, git fails with
+`Permission denied (publickey)`. To pull before then, bypass the global config
+for one command:
+
+```sh
+GIT_CONFIG_GLOBAL=/dev/null git pull
+```
+
 `bootstrap.sh` copies only live config. It excludes `legacy/`, `Brewfile`,
 `README.md`, `RESTORE.md` and `.git/`.
 

@@ -58,7 +58,15 @@ ZSH_THEME="agnoster"
 # virtualenvwrapper and buffalo removed: the buffalo plugin does not exist in
 # oh-my-zsh at all, and virtualenvwrapper.sh is not installed - both printed a
 # warning on every shell startup.
-plugins=(git brew docker)
+# zsh-autosuggestions and zsh-syntax-highlighting are NOT bundled with
+# oh-my-zsh - clone them into $ZSH_CUSTOM/plugins (see RESTORE.md). Both are
+# guarded below, so a missing clone degrades instead of erroring.
+# Order matters: zsh-syntax-highlighting must come last.
+plugins=(git brew docker kubectl helm)
+[ -d "${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-autosuggestions" ] \
+  && plugins+=(zsh-autosuggestions)
+[ -d "${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-syntax-highlighting" ] \
+  && plugins+=(zsh-syntax-highlighting)
 
 # Guarded: on a fresh machine .zshrc can land before oh-my-zsh is cloned, and
 # an unguarded source errors on every shell. Install with:
@@ -116,3 +124,23 @@ if [ -f "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh" ]; then
   source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
   PS1='$(kube_ps1)'$PS1
 fi
+
+# --- completion behaviour ---------------------------------------------------
+# Case-insensitive, then partial-word, then substring matching, so "kubctl",
+# "k-c" and "ctl" all find their way to a match.
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' menu select                 # arrow-key menu
+zstyle ':completion:*' group-name ''               # group by category
+zstyle ':completion:*:descriptions' format '%F{yellow}%d%f'
+setopt AUTO_CD                                      # "dotfiles" -> "cd dotfiles"
+setopt GLOB_COMPLETE                                # expand globs on tab
+setopt HIST_IGNORE_ALL_DUPS                         # keep history useful for suggestions
+setopt SHARE_HISTORY                                # share across panes/tabs
+
+# fzf keybindings: ctrl-R fuzzy history, ctrl-T file picker, ALT-C cd.
+# Uses fzf's own integration rather than oh-my-zsh's fzf plugin, which emits
+# "can't change option: zle" on shell startup.
+command -v fzf >/dev/null 2>&1 && eval "$(fzf --zsh)"
+
+# Accept the inline suggestion with ctrl-space (only if the widget exists)
+(( $+widgets[autosuggest-accept] )) && bindkey '^ ' autosuggest-accept

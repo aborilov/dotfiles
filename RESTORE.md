@@ -198,6 +198,30 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 that before worrying about it — and note it will break outright if the new
 machine uses a different username.
 
+### 6b. zsh completion plugins
+
+`.zshrc` enables these when present and silently skips them when not, so the
+clones are optional — but they are the bulk of what makes the shell feel smart.
+
+```sh
+ZC="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions "$ZC/plugins/zsh-autosuggestions"
+git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting "$ZC/plugins/zsh-syntax-highlighting"
+exec zsh
+```
+
+- **zsh-autosuggestions** — greys in the rest of a command from history as you
+  type; `ctrl-space` accepts it (bound in `.zshrc`), right-arrow accepts too.
+- **zsh-syntax-highlighting** — colours the command line live, so a typo'd
+  command shows red before you run it. Must load last; `.zshrc` appends it last.
+
+Also active, from oh-my-zsh and fzf itself: `kubectl` and `helm` completions,
+and fzf's `ctrl-R` fuzzy history / `ctrl-T` file picker / `alt-C` cd (wired via
+`fzf --zsh` rather than the oh-my-zsh fzf plugin).
+
+Note these clones use HTTPS, which `.gitconfig` rewrites to SSH — so they need
+step 5 done first, or `GIT_CONFIG_GLOBAL=/dev/null` in front.
+
 ### 7. Fonts
 
 `bootstrap.sh` puts the Inconsolata LGC Nerd Font into `~/.fonts`, which is a

@@ -9,6 +9,8 @@ t ".zshrc guarded (no hard error)" 'grep -q "if \[ -f \"\$ZSH/oh-my-zsh.sh\" \]"
 t "ghostty config in place"    '[ -f "$HOME/.config/ghostty/config" ]'
 t "fonts registered"           'ls "$HOME/Library/Fonts/"*.ttf'
 t "kube-ps1 installed"         '[ -f /opt/homebrew/opt/kube-ps1/share/kube-ps1.sh ]'
+t "zsh-autosuggestions"        '[ -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]'
+t "zsh-syntax-highlighting"    '[ -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]'
 
 echo "— keys —"
 t "3 GPG secret keys"          '[ "$(gpg --list-secret-keys --with-colons 2>/dev/null | grep -c ^sec)" = 3 ]'

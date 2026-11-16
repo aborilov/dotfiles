@@ -133,6 +133,49 @@ echo test | gpg --clearsign -u 0A43C5E87075BA0B   # the git signing key
 ssh -T git@github.com
 ```
 
+#### If GPG says "No secret key" — disable keyboxd
+
+The one part of a GnuPG migration that copying `~/.gnupg` does not survive.
+Whether `keyboxd` is active is decided by the *new* install, not by what you
+copied, so this happens even when both machines run the same GnuPG version.
+
+Symptoms — the private keys are plainly there, yet GPG cannot see any of them:
+
+```
+gpg: skipped "0A43C5E87075BA0B": No secret key
+gpg: [stdin]: clear-sign failed: No secret key
+```
+
+with `gpg --list-secret-keys` and `gpg --list-keys` both printing *nothing*,
+while `ls ~/.gnupg/private-keys-v1.d` shows all six `.key` files.
+
+The tell is files in `~/.gnupg` dated today rather than coming from the backup:
+
+| Appeared | Meaning |
+|---|---|
+| `common.conf` (12 bytes = `use-keyboxd\n`) | keyboxd switched on |
+| `public-keys.d/` | its SQLite store — empty |
+| `S.keyboxd` | its socket |
+
+`keyboxd` keeps public keys in `public-keys.d/pubring.db` and ignores
+`pubring.kbx` altogether. The restored private keys are found, the matching
+public keys are not, and GPG reports the whole key as missing.
+
+Turn it off so GPG reads the restored `pubring.kbx`:
+
+```sh
+cat ~/.gnupg/common.conf                  # confirm it says use-keyboxd
+gpgconf --kill all
+mv ~/.gnupg/common.conf ~/.gnupg/common.conf.disabled
+rm -rf ~/.gnupg/public-keys.d             # created fresh, holds nothing
+gpgconf --kill all
+gpg --list-secret-keys --keyid-format long
+```
+
+Deleting `public-keys.d` is safe: the real public keyring is the ~351 KB
+`pubring.kbx` from the backup. If `common.conf` contains anything other than
+`use-keyboxd`, edit out just that line instead of moving the file.
+
 ### 6. Editor and tmux plugins
 
 Plugin managers are not vendored; each bootstraps its own plugins.

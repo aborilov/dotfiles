@@ -175,8 +175,8 @@ cask "vimr"
 cask "tailscale-app"
 cask "synology-drive"
 cask "1password"
-# Terminal emulator; this repo ships .config/alacritty/alacritty.toml
-cask "alacritty"
+# Terminal emulator; this repo ships .config/ghostty/config
+cask "ghostty"
 # -------------------------------------------------------------------------
 
 go "github.com/klauspost/asmfmt/cmd/asmfmt"

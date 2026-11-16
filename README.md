@@ -38,7 +38,7 @@ nvim / tmux plugin managers, and log back into the CLI tools — all covered in
 | `.tmux.conf`, `.tmuxline.conf` | tmux + airline-matched statusline |
 | `.gitconfig`, `.gitignore` | git config; `.gitignore` is the global `core.excludesfile` |
 | `.config/git/ignore` | XDG global git excludes |
-| `.config/alacritty/` | Alacritty terminal |
+| `.config/ghostty/` | Ghostty terminal (Solarized Dark, Inconsolata LGC Nerd Font) |
 | `.config/k9s/` | k9s config, aliases, skin |
 | `.config/helm/repositories.yaml` | helm chart repos |
 | `.config/herdr/config.toml` | herdr keybindings |

@@ -70,7 +70,7 @@ wanted. For a deliberately clean machine, skip `brew bundle` and install only
 what you reach for:
 
 ```sh
-brew install --cask alacritty 1password tailscale-app synology-drive
+brew install --cask ghostty 1password tailscale-app synology-drive
 brew install git gnupg pinentry-mac neovim tmux ripgrep fzf jq gh \
              kubernetes-cli helm k9s go
 ```

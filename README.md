@@ -15,7 +15,7 @@ xcode-select --install
 
 git clone https://github.com/aborilov/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-brew bundle install --file=Brewfile
+GOPATH="$HOME/work/go" brew bundle install --file=Brewfile
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 ./bootstrap.sh
 ```

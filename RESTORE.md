@@ -53,8 +53,16 @@ straight from DSM in a browser. Expect it to be slow: the link is remote
 ```sh
 git clone https://github.com/aborilov/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-brew bundle install --file=Brewfile     # installs gnupg + pinentry-mac, needed next
+GOPATH="$HOME/work/go" brew bundle install --file=Brewfile
 ```
+
+Set `GOPATH` on that command line. The Brewfile's 20 `go` entries run
+`go install`, which honours `GOPATH` — but `.zshrc` is what normally sets it to
+`~/work/go`, and `.zshrc` is not in place yet at this point. Without the
+override, Go defaults to `~/go/bin` while `.zshrc` later puts `~/work/go/bin`
+on `PATH`, so all 20 tools install successfully and then appear to be missing.
+
+This step installs `gnupg` and `pinentry-mac`, which step 5 needs.
 
 ### 4. Shell, then the configs
 

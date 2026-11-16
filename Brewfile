@@ -168,6 +168,18 @@ cask "keybase"
 cask "ngrok"
 # GUI for the Neovim text editor
 cask "vimr"
+
+# --- Restore-critical GUI apps -------------------------------------------
+# These are needed BEFORE the rest of a new-machine restore can proceed:
+# Tailscale reaches the NAS, Synology Drive fetches the backup archives,
+# and 1Password holds the archive passphrase. See RESTORE.md.
+cask "tailscale-app"
+cask "synology-drive"
+cask "1password"
+# Terminal emulator; this repo ships .config/alacritty/alacritty.toml
+cask "alacritty"
+# -------------------------------------------------------------------------
+
 go "github.com/klauspost/asmfmt/cmd/asmfmt"
 go "github.com/go-delve/delve/cmd/dlv"
 go "github.com/kisielk/errcheck"

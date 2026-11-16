@@ -33,6 +33,21 @@ Key). The keys-archive passphrase and its location are recorded there, as is
 everything in the re-login table below. Until this works, nothing else can
 proceed.
 
+### 2b. Tailscale, then the backup archives
+
+The NAS is only reachable over Tailscale — it is not on the local network. So
+Tailscale has to be installed and logged in before the keys archive can be
+fetched at step 5.
+
+```sh
+brew install --cask tailscale-app synology-drive 1password
+```
+
+Sign in to Tailscale, confirm the NAS shows as `active` in its peer list, then
+either let Synology Drive sync `mac-migration/` down, or pull the two files
+straight from DSM in a browser. Expect it to be slow: the link is remote
+(~300 ms RTT, ~80 KB/s), so the 55 MB work archive takes several minutes.
+
 ### 3. This repo, and the toolchain
 
 ```sh

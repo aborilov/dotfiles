@@ -250,6 +250,59 @@ Each of these re-mints its own credentials; none are backed up.
 | Claude Code | `claude` then follow the prompt |
 | kubeconfig | re-fetch per cluster from the provider |
 
+## Backups: what lives on the NAS
+
+A Synology NAS, reachable **only over Tailscale** — it is not on the local
+network, so Tailscale must be connected before any of this works. Synology
+Drive Client syncs the `home` share (remote `/`) two-way to `~/SynologyDrive/`.
+
+`~/SynologyDrive/mac-migration/` holds the machine backups:
+
+| File | What |
+|---|---|
+| `keys.tar.gz.gpg` | `~/.gnupg` + `~/.ssh`, AES256 under a passphrase kept in 1Password |
+| `aws-config` | `~/.aws/config` — SSO profile definitions, no credentials |
+| `uncommitted-work.tar.gz` | untracked files from `~/work` that exist on no remote |
+
+### Refreshing them
+
+```sh
+cd ~/dotfiles && ./backup.sh          # or --keys-only
+```
+
+`backup.sh` encrypts the keys, copies the AWS profiles (refusing to if they
+contain credentials), verifies the archive decrypts, then waits for Synology
+Drive to confirm the upload rather than assuming a local write means an
+uploaded file.
+
+It stages into `~/.backup-staging` and moves the finished file in, because
+writing straight into the sync folder lets the client read it mid-write —
+that logs `Failed to read file … Operation timed out` and forces a retry.
+
+### Setting sync up on a new machine
+
+Connect Tailscale first and confirm the NAS is reachable, then in Synology
+Drive Client add a sync task: remote `home` at `/`, local `~/SynologyDrive`,
+two-way. The link is slow (~300 ms RTT, ~80 KB/s), so a 55 MB archive takes
+several minutes and the full share takes hours — use selective sync if you
+only want `mac-migration/`.
+
+Check status without opening the app:
+
+```sh
+DB="$HOME/Library/Application Support/SynologyDrive/data/db"
+sqlite3 "file:$DB/file-status.sqlite?mode=ro" "SELECT count(*) FROM fstatinfo;"   # 0 = idle
+sqlite3 "file:$DB/history.sqlite?mode=ro" \
+  "SELECT name, is_not_synced FROM history_table WHERE path LIKE '%mac-migration%';"
+```
+
+`is_not_synced = 0` means it reached the NAS. Local presence alone only proves
+the file was queued.
+
+**Before erasing a machine, quit Synology Drive Client.** The sync is two-way,
+so wiping the disk with the client running replicates the deletion and takes
+the backups with it.
+
 ## Verifying the restore
 
 `./check.sh` audits everything this document sets up — oh-my-zsh, the Ghostty

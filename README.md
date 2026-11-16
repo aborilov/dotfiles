@@ -45,6 +45,16 @@ nvim / tmux plugin managers, and log back into the CLI tools — all covered in
 | `.fonts/` | Inconsolata LGC Nerd Font (powerline) |
 | `legacy/` | Old Linux desktop + mutt/offlineimap/mcabber mail setup. Reference only; `bootstrap.sh` does **not** copy it. |
 
+## Scripts
+
+| Script | What it does |
+|---|---|
+| `./bootstrap.sh` | rsync the configs in this repo into `~` (`-f` skips the prompt) |
+| `./backup.sh` | refresh the encrypted key/AWS backups on the NAS and wait for the upload to confirm |
+| `./check.sh` | audit a finished restore; anything printed `--` is outstanding |
+
+None of them are copied into `~` — they are repo tools, not dotfiles.
+
 ## Not in here
 
 Private keys, OAuth tokens, and `~/.ssh` / `~/.gnupg` are kept out of this repo

@@ -204,8 +204,12 @@ machine uses a different username.
 Linux convention that macOS ignores. Copy them where macOS looks:
 
 ```sh
+mkdir -p ~/Library/Fonts        # absent on a fresh account; cp fails without it
 cp ~/.fonts/*.ttf ~/Library/Fonts/
 ```
+
+Or `open ~/.fonts/*.ttf` to install them through Font Book, which creates the
+folder itself.
 
 ### 8. Log back in
 

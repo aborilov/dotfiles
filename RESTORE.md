@@ -84,9 +84,17 @@ oh-my-zsh must exist *before* `.zshrc` lands, or every new shell errors on
 startup — `.zshrc` sources `$ZSH/oh-my-zsh.sh` unconditionally.
 
 ```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
 cd ~/dotfiles && ./bootstrap.sh         # rsyncs configs into ~; -f skips the prompt
 ```
+
+Clone oh-my-zsh rather than running its install script. The installer replaces
+`~/.zshrc` with its own template (backing yours up to `.zshrc.pre-oh-my-zsh`),
+which silently undoes `bootstrap.sh` if run after it. A plain clone touches
+nothing else. If you prefer the installer, pass `--keep-zshrc`.
+
+`.zshrc` now guards both of its `source` lines, so landing it before oh-my-zsh
+or `kube-ps1` exists prints a hint instead of an error on every shell.
 
 `bootstrap.sh` copies only live config. It excludes `legacy/`, `Brewfile`,
 `README.md`, `RESTORE.md` and `.git/`.

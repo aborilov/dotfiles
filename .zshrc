@@ -60,7 +60,14 @@ ZSH_THEME="agnoster"
 # warning on every shell startup.
 plugins=(git brew docker)
 
-source $ZSH/oh-my-zsh.sh
+# Guarded: on a fresh machine .zshrc can land before oh-my-zsh is cloned, and
+# an unguarded source errors on every shell. Install with:
+#   git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
+if [ -f "$ZSH/oh-my-zsh.sh" ]; then
+  source "$ZSH/oh-my-zsh.sh"
+else
+  echo "oh-my-zsh not installed: git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh"
+fi
 
 # User configuration
 
@@ -104,5 +111,8 @@ export PATH="/usr/local/opt/helm@2/bin:$PATH"
 
 # kube-ps1: show current Kubernetes context/namespace in the prompt.
 # Must come after `source $ZSH/oh-my-zsh.sh` so it prefixes the theme's prompt.
-source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
-PS1='$(kube_ps1)'$PS1
+# Guarded: brew install kube-ps1
+if [ -f "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh" ]; then
+  source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
+  PS1='$(kube_ps1)'$PS1
+fi

@@ -64,6 +64,20 @@ on `PATH`, so all 20 tools install successfully and then appear to be missing.
 
 This step installs `gnupg` and `pinentry-mac`, which step 5 needs.
 
+The Brewfile is a snapshot of one machine's accumulated state, not a curated
+list — it installs ~70 formulae and 20 Go tools, many of which may no longer be
+wanted. For a deliberately clean machine, skip `brew bundle` and install only
+what you reach for:
+
+```sh
+brew install --cask alacritty 1password tailscale-app synology-drive
+brew install git gnupg pinentry-mac neovim tmux ripgrep fzf jq gh \
+             kubernetes-cli helm k9s go
+```
+
+The full Brewfile stays in the repo as a reference for what was once installed;
+cherry-pick from it rather than replaying it wholesale.
+
 ### 4. Shell, then the configs
 
 oh-my-zsh must exist *before* `.zshrc` lands, or every new shell errors on
